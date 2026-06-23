@@ -86,15 +86,15 @@
   </a>
   <a class="btn ghost" href="index.html">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    <span>Voltar ao site</span>
+    <span data-i18n="back">Voltar ao site</span>
   </a>
 </header>
 
 <section class="intro">
   <div class="wrap">
-    <span class="eyebrow">Payment Plans</span>
-    <h1>Parcele seu <em>tratamento</em></h1>
-    <p>Realize seu procedimento agora e pague aos poucos. Financiamento sem complicação através da Cherry — verifique seu limite em segundos, sem afetar seu score de crédito.</p>
+    <span class="eyebrow" data-i18n="eyebrow">Payment Plans</span>
+    <h1 data-i18n-html="title">Parcele seu <em>tratamento</em></h1>
+    <p data-i18n="sub">Realize seu procedimento agora e pague aos poucos. Financiamento sem complicação através da Cherry — verifique seu limite em segundos, sem afetar seu score de crédito.</p>
   </div>
 </section>
 
@@ -116,10 +116,40 @@
 <footer>
   <div class="wrap">
     <span class="brand-name">Kika Bergmann</span>
-    <p>Luxury Permanent Makeup · Orlando, FL · +1 (689) 253-7082</p>
-    <a class="backlink" href="index.html">← Voltar ao site</a>
+    <p data-i18n="foot_tag">Luxury Permanent Makeup · Orlando, FL · +1 (689) 253-7082</p>
+    <a class="backlink" href="index.html" data-i18n="back_arrow">← Voltar ao site</a>
   </div>
 </footer>
+
+<script>
+  // i18n: mantém o idioma escolhido no index.html (widget Cherry permanece em inglês)
+  (function(){
+    const I18N = {
+      back:{en:"Back to site",pt:"Voltar ao site",es:"Volver al sitio"},
+      back_arrow:{en:"← Back to site",pt:"← Voltar ao site",es:"← Volver al sitio"},
+      eyebrow:{en:"Payment Plans",pt:"Parcelamento",es:"Financiación"},
+      title:{en:"Finance your <em>treatment</em>",pt:"Parcele seu <em>tratamento</em>",es:"Financia tu <em>tratamiento</em>"},
+      sub:{en:"Get your procedure now and pay over time. Simple financing through Cherry — check your limit in seconds, with no impact to your credit score.",pt:"Realize seu procedimento agora e pague aos poucos. Financiamento sem complicação através da Cherry — verifique seu limite em segundos, sem afetar seu score de crédito.",es:"Realiza tu procedimiento ahora y paga a plazos. Financiación sin complicaciones a través de Cherry — consulta tu límite en segundos, sin afectar tu historial de crédito."},
+      foot_tag:{en:"Luxury Permanent Makeup · Orlando, FL · +1 (689) 253-7082",pt:"Maquiagem Permanente de Luxo · Orlando, FL · +1 (689) 253-7082",es:"Maquillaje Permanente de Lujo · Orlando, FL · +1 (689) 253-7082"}
+    };
+    function detectDeviceLang(){
+      const list=(navigator.languages&&navigator.languages.length)?navigator.languages:[navigator.language||"en"];
+      for(const raw of list){const c=String(raw).toLowerCase().slice(0,2);if(c==="pt"||c==="es"||c==="en")return c;}
+      return "en";
+    }
+    let lang="en";
+    const qp=new URLSearchParams(location.search).get("lang");
+    if(qp&&["pt","en","es"].includes(qp)){
+      lang=qp;
+      try{localStorage.setItem("kika_lang",qp);}catch(e){}
+    }else{
+      try{const s=localStorage.getItem("kika_lang");lang=(s&&["pt","en","es"].includes(s))?s:detectDeviceLang();}catch(e){lang=detectDeviceLang();}
+    }
+    document.documentElement.lang=lang;
+    document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n");if(I18N[k]&&I18N[k][lang]!=null)el.textContent=I18N[k][lang];});
+    document.querySelectorAll("[data-i18n-html]").forEach(el=>{const k=el.getAttribute("data-i18n-html");if(I18N[k]&&I18N[k][lang]!=null)el.innerHTML=I18N[k][lang];});
+  })();
+</script>
 
 <script>
   (function (w, d, s, o, f, js, fjs) {
