@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Kika Bergmann — Client Consent & Intake Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f8f4ee; --bg-2:#f0e9dd; --blush:#e3d2c6; --card:#fffdf9;
+  --gold:#b0905c; --gold-deep:#8a6f44; --ink:#2c2620; --ink-soft:#857a6c;
+  --line:rgba(44,38,32,.14); --line-soft:rgba(44,38,32,.08);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --sans:"Jost","Montserrat",system-ui,sans-serif;
+  --radius:14px; --shadow:0 24px 60px -28px rgba(44,38,32,.30);
+  --max:760px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--sans); color:var(--ink); background:var(--bg);
+  font-weight:300; line-height:1.6; -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+/* Header */
+header{position:sticky;top:0;z-index:30;background:rgba(248,244,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line-soft)}
+.head-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;max-width:var(--max);margin:0 auto}
+.brand{display:flex;flex-direction:column;line-height:1;text-decoration:none;color:var(--ink)}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:26px;letter-spacing:.5px}
+.brand-name small{display:block;font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
+.lang{display:flex;gap:2px;align-items:center}
+.lang button{background:none;border:1px solid var(--line);color:var(--ink-soft);font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:1px;padding:6px 10px;border-radius:8px;cursor:pointer;transition:.15s}
+.lang button.active{background:var(--gold);border-color:var(--gold);color:#fff}
+
+/* Progress */
+.progress{max-width:var(--max);margin:0 auto;padding:14px 18px 0}
+.bar{height:5px;background:var(--bg-2);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-deep));border-radius:99px;transition:width .35s ease;width:16%}
+.steplabel{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);margin-top:8px}
+
+/* Main */
+main{padding:22px 0 40px}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.15;margin:.2em 0 .3em}
+h2{font-family:var(--serif);font-weight:600;font-size:23px;color:var(--gold-deep);margin:1.4em 0 .5em;padding-bottom:.25em;border-bottom:1px solid var(--line-soft)}
+h3{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.5px;margin:1.2em 0 .4em;text-transform:uppercase;color:var(--ink)}
+p{margin:.5em 0}
+.lead{color:var(--ink-soft);font-size:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:14px 0}
+.muted{color:var(--ink-soft);font-size:13px}
+ul.risks{list-style:none;padding:0;margin:.4em 0}
+ul.risks li{position:relative;padding:7px 0 7px 22px;border-bottom:1px solid var(--line-soft);font-size:14.5px}
+ul.risks li:before{content:"";position:absolute;left:2px;top:14px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+ul.risks li b{font-weight:600}
+.addbanner{display:inline-block;background:var(--gold);color:#fff;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:99px;margin:34px 0 4px}
+.policy{background:#fbeeee;border:1px solid #e6c9c9;border-left:4px solid #c0676b;border-radius:10px;padding:12px 14px;font-size:14px;color:#5c2b2e;margin:12px 0}
+.policy b{color:#7a2f33}
+
+/* Choice cards (service / technique / language) */
+.choices{display:grid;gap:12px;margin:16px 0}
+.choices.cols2{grid-template-columns:1fr 1fr}
+.choice{display:flex;align-items:center;gap:14px;background:var(--card);border:1.5px solid var(--line);border-radius:var(--radius);padding:16px 18px;cursor:pointer;transition:.15s;text-align:left;width:100%;font-family:inherit;color:inherit;font-size:16px}
+.choice:hover{border-color:var(--gold)}
+.choice.sel{border-color:var(--gold);background:#fbf6ee;box-shadow:0 0 0 3px rgba(176,144,92,.15)}
+.choice .ico{font-size:24px;width:34px;flex-shrink:0;text-align:center;color:var(--gold);display:flex;align-items:center;justify-content:center}
+.choice .ico svg{width:32px;height:32px;display:block}
+.choice .ct strong{display:block;font-family:var(--serif);font-size:20px;font-weight:600}
+.choice .ct span{font-size:13px;color:var(--ink-soft)}
+
+/* Fields */
+label.fld{display:block;margin:12px 0}
+label.fld>span{display:block;font-size:12px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+input[type=text],input[type=tel],input[type=email],input[type=date],input[type=number],textarea,select{
+  width:100%;font-family:var(--sans);font-size:16px;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:10px;padding:12px 13px;font-weight:300;
+}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,144,92,.15)}
+textarea{min-height:80px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.req{color:var(--gold-deep)}
+
+/* Yes/No toggles */
+.yn{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;flex-shrink:0}
+.yn button{background:#fff;border:none;padding:7px 16px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;color:var(--ink-soft)}
+.yn button.on-yes{background:var(--gold);color:#fff}
+.yn button.on-no{background:var(--ink-soft);color:#fff}
+
+/* Medical condition rows */
+.cond{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.cond .cl{font-size:14px;flex:1}
+.cond .note{margin-top:8px}
+.condwrap{margin-top:6px}
+
+/* Declaration */
+.decl{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+.decl input[type=checkbox]{width:22px;height:22px;flex-shrink:0;accent-color:var(--gold);margin-top:2px}
+.decl label{font-size:14px;cursor:pointer}
+
+/* Signature */
+.sigbox{border:1.5px dashed var(--gold);border-radius:var(--radius);background:#fff;position:relative;touch-action:none}
+.sigbox canvas{display:block;width:100%;height:200px;border-radius:var(--radius)}
+.sighint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--ink-soft);font-size:14px;pointer-events:none;opacity:.6}
+.sigline{position:absolute;left:24px;right:24px;bottom:42px;border-bottom:1px solid var(--line)}
+
+/* Buttons */
+.nav{display:flex;gap:12px;margin-top:24px}
+.btn{font-family:var(--sans);font-weight:500;font-size:15px;letter-spacing:.5px;border-radius:99px;padding:14px 26px;cursor:pointer;border:1px solid transparent;transition:.15s;flex:1;text-align:center}
+.btn.primary{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn.primary:hover{background:var(--gold-deep)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn.small{flex:0 0 auto;padding:9px 16px;font-size:13px}
+
+.err{color:#b0413e;font-size:13px;margin-top:6px;display:none}
+.err.show{display:block}
+.field-bad input,.field-bad textarea,.field-bad select{border-color:#d98a87}
+.condwrap.field-bad,.cond.field-bad,.choices.field-bad{outline:2px solid #d98a87;outline-offset:3px;border-radius:8px;background:#fdf0ef}
+input[readonly]{background:var(--bg-2);color:var(--ink-soft);cursor:not-allowed}
+.toast{position:fixed;top:74px;left:50%;transform:translateX(-50%) translateY(-12px);background:#b0413e;color:#fff;font-family:var(--sans);font-size:14px;font-weight:500;padding:13px 20px;border-radius:12px;z-index:200;box-shadow:0 14px 36px -10px rgba(176,65,62,.6);max-width:92%;text-align:center;opacity:0;pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.hide{display:none!important}
+.center{text-align:center}
+.govnote{font-size:12px;color:var(--ink-soft);font-style:italic;margin-top:10px;text-align:center}
+footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:11px;letter-spacing:1px}
+
+/* Review doc */
+.docview h2{font-size:20px}
+.docview .meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;background:var(--bg-2);border-radius:10px;padding:12px 14px;margin:10px 0}
+.docview .meta b{color:var(--ink-soft);font-weight:500;display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+
+@media(max-width:560px){
+  .grid3{grid-template-columns:1fr}
+  .grid2{grid-template-columns:1fr}
+  .choices.cols2{grid-template-columns:1fr}
+  h1{font-size:26px}
+  .nav{flex-direction:column-reverse}
+  .docview .meta{grid-template-columns:1fr}
+}
+@media print{
+  header,.progress,.nav,.lang,footer{display:none!important}
+  body{background:#fff}
+  .card{box-shadow:none;border:none;page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="head-inner">
+    <a class="brand" href="#" onclick="return false">
+      <span class="brand-name">Kika Bergmann<small>Permanent Makeup</small></span>
+    </a>
+    <nav class="lang" aria-label="Language">
+      <button data-lang="en">EN</button>
+      <button data-lang="es">ES</button>
+      <button data-lang="pt">PT</button>
+    </nav>
+  </div>
+</header>
+
+<div class="progress">
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="steplabel" id="plabel"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<main>
+  <div class="wrap" id="app"></div>
+</main>
+
+<footer>ORLANDO MICROBLADING BY KIKA BERGMANN · CONFIDENTIAL CLIENT RECORD</footer>
+
+<script>
+/* =====================================================================
+   CONFIG
+===================================================================== */
+const CONFIG = {
+  // Endpoint do n8n (a ser criado na próxima fase). Deixe vazio para testar sem enviar.
+  WEBHOOK_URL: "https://n8n.homeiot.app/webhook/consent-form",
+  BUSINESS: "Orlando Microblading by Kika Bergmann",
+  TOUCHUP_FEE: "$150"
+};
+
+/* =====================================================================
+   CONTENT — EN is the legally governing source. ES/PT for comprehension.
+===================================================================== */
+const SERVICES = ["eyebrows","lips","eyeliner"];
+
+const C = {
+/* ---------- ENGLISH ---------- */
+en:{
+  langName:"English",
+  stepNames:["Language","Service","Consent","Service Details","Medical Intake","Review & Sign"],
+  formTitle:"Client Consent & Intake Form",
+  intro:"This form is designed to ensure you have the information needed to make a fully informed decision about your permanent makeup procedure. Please read every section carefully. Completing and signing this form indicates your understanding of and consent to the procedure selected.",
+  // Step 0
+  chooseLang:"Please choose your language",
+  chooseLangSub:"You can change it anytime using the buttons at the top.",
+  // Step 1
+  chooseService:"Which service are you receiving today?",
+  chooseServiceSub:"Select one service. If you are getting more than one procedure today, please complete one form per service.",
+  svc:{eyebrows:{t:"Eyebrows",d:"Microblading · Ombre/Powder · Combo · Nano · Hair Strokes",i:"✦"},
+       lips:{t:"Lips",d:"Lip Blush · Soft Blush · Ombre · Dark Lips",i:"❀"},
+       eyeliner:{t:"Eyeliner",d:"Classic · Lash Line · Smoke · Lash Enhancement",i:"◗"}},
+  chooseTech:"Select your technique",
+  pigmentLabel:"Color / Pigment (completed with your artist — optional)",
+  // Step 2 — Main consent (general)
+  generalTitle:"General Information",
+  generalP1:"This form is designed to ensure you have the information needed to make a fully informed decision about your permanent makeup procedure. Please read every section carefully and do not hesitate to ask your artist any questions before signing. Completing and signing this form indicates your understanding of and consent to the procedure selected.",
+  generalP2:"All instruments that come into contact with the skin or body fluids are single-use and discarded immediately after use. Cross-contamination control guidelines are strictly followed in compliance with standard bloodborne pathogen protocols.",
+  risksTitle:"Possible Risks & Complications (All Services)",
+  risksIntro:"The following risks apply to all permanent makeup procedures. Service-specific risks are detailed in the next section.",
+  risksAll:[
+    ["Pain / Discomfort","Some discomfort may occur even with topical anesthetic."],
+    ["Infection","Rare but possible. Keep the area clean; touch only with freshly washed hands."],
+    ["Uneven Pigmentation","May result from poor healing or skin type. Correctable at touch-up."],
+    ["Allergic Reaction","To pigment, anesthetic, or aftercare products. Patch test available upon request (5–7 days prior)."],
+    ["Swelling or Bruising","Common in the first 1–5 days. A clean wrapped ice pack can help."],
+    ["Anesthetics","Lidocaine, prilocaine, benzocaine, tetracaine, and epinephrine may be used. Disclose all known allergies."],
+    ["MRI","Metallic pigments may cause minor sensation. Always notify your radiologist of any permanent makeup."],
+    ["Pigment Migration","In rare cases, pigment may spread slightly beyond the application area."],
+    ["Hyper / Hypopigmentation","Changes in surrounding skin pigment are possible, especially in darker skin tones."],
+    ["Keloid / Scarring","Higher risk for individuals prone to keloids. Consult a physician before proceeding."]
+  ],
+  patchTitle:"Patch Test",
+  patchText:"A patch test is available 5–7 days prior to your appointment to check for sensitivity. As an alternative, you may choose to use traditional cosmetics and decline the procedure at any time. Please indicate your choice:",
+  patchWaive:"I waive the patch test",
+  patchRequest:"I request a patch test",
+  // Step 3 addendums handled in ADD below
+  // Step 4 — Declaration + Medical
+  declTitle:"Declaration of Consent",
+  declIntro:"Please check each line to confirm your understanding and agreement.",
+  declItems:[
+    "I have received and reviewed the aftercare instructions and will follow them carefully.",
+    "I understand this procedure may cause temporary discomfort, swelling, redness, or bruising.",
+    "I understand that Retin-A, Renova, Alpha Hydroxy Acids, Glycolic Acids, and similar exfoliating products must NOT be applied to the treated area.",
+    "I understand that prolonged sun exposure, tanning beds, swimming pools, and cosmetics applied too soon can negatively affect pigment retention and longevity.",
+    "I will inform all relevant medical professionals — including radiologists and surgeons — about my permanent makeup, especially prior to any MRI or facial procedure.",
+    "I accept responsibility for the color, shape, and design discussed and approved with my artist during consultation.",
+    "I understand pigment will fade over time and that a touch-up must be scheduled between 4 and 6 weeks after the initial session. Touch-ups cannot be performed beyond the 6-week window for any service. (Touch-Up fee: "+ "$150" +".)",
+    "I recognize inherent risks including, but not limited to, infection, pigment migration, poor color retention, and hyperpigmentation.",
+    "I understand the initial session price does NOT include the 4–6-week touch-up appointment.",
+    "Annual maintenance sessions do not include touch-up appointments.",
+    "I understand that results vary based on individual skin type, lifestyle, and aftercare, and that no specific outcome can be guaranteed.",
+    "I confirm that I am not pregnant or breastfeeding, or I have disclosed this to my artist and received medical clearance.",
+    "I confirm I have not consumed alcohol or blood-thinning medications (aspirin, ibuprofen, fish oil, vitamin E) in the 24 hours prior to my appointment."
+  ],
+  declInitials:"Your initials",
+  medTitle:"Client Medical History",
+  medIntro:"Please complete all fields accurately. This information is kept strictly confidential and is used solely to ensure your safety during the procedure.",
+  personal:"Personal Information",
+  f_fullname:"Full Name", f_dob:"Date of Birth", f_age:"Age",
+  f_phone:"Phone Number", f_email:"Email Address", f_address:"Address",
+  f_city:"City", f_state:"State / Zip", f_ec_name:"Emergency Contact Name",
+  f_ec_phone:"Emergency Contact Phone", f_id:"ID / Driver's License #",
+  condTitle:"Medical Conditions",
+  condIntro:"Tap Yes or No for each. If Yes, please add details in the notes box that appears.",
+  conditions:[
+    "History of MRSA or skin infections","Botox","Diabetes (Type 1 / Type 2)","Seborrheic Dermatitis",
+    "Dry or Oily Skin (please specify)","Hepatitis A, B, C, or D","Brow or Forehead Lift Surgery",
+    "Easy Bleeding / Clotting Disorders","Facelift Surgery","Alcoholism or heavy alcohol use",
+    "Heart Conditions / Pacemaker","Difficulty numbing with dental anesthetic","Chemical Peel",
+    "Pregnant or Breastfeeding","Brow or Lash Tint (recent)","Autoimmune Disorder (e.g., Lupus, Psoriasis)",
+    "Cancer","Accutane or prescription acne treatment (must stop 1 year prior)","Chemotherapy or Radiation (recent or ongoing)",
+    "Sun or artificial tanning (recent)","Tumors or Cysts (facial/scalp area)","Rosacea or Eczema",
+    "Thyroid Disorder","HIV / AIDS","Blood Thinners (Aspirin, Ibuprofen, Coumadin, Xarelto, etc.)",
+    "Allergy to Lidocaine, Tetracaine, Epinephrine, or similar","Allergy to metals, foods, or other substances",
+    "Keloid scarring tendency","Recent facial injections (filler, PRP, etc.)","Herpes Simplex Virus (HSV-1 / HSV-2 — cold sores)",
+    "Retin-A, Glycolic Acid, or Alpha Hydroxy Acid use","Other conditions not listed above"
+  ],
+  medsLabel:"Current Medications & Supplements — list all current medications, vitamins, and supplements",
+  medConfirm:"I confirm that all information provided is true and accurate to the best of my knowledge. I understand that withholding relevant medical information may affect the safety and outcome of my procedure.",
+  yes:"Yes", no:"No", notes:"Notes / details",
+  // Step 5 — Photo + signature
+  finalTitle:"Photography Consent & Signature",
+  photoTitle:"Photography Consent",
+  photoText:"I authorize "+ "Orlando Microblading by Kika Bergmann" +" to take before-and-after photographs of my procedure for record-keeping, educational, and/or marketing purposes, including social media platforms.",
+  photoYes:"Yes, you may use my photos",
+  photoNo:"No, do not use my photos",
+  certTitle:"Final Certification",
+  certText:"I certify that I have read — or had read to me — the full contents of this consent form, including the medical history, the declaration of consent, and the service-specific addendum above. I have had the opportunity to ask questions and all have been answered to my satisfaction. I authorize Kika Bergmann as my permanent makeup artist to perform today's procedure. My signature below applies to this entire document.",
+  sigLabel:"Sign here with your finger or mouse",
+  sigHint:"Sign here",
+  clearSig:"Clear",
+  dateAuto:"Date",
+  // Nav / system
+  next:"Continue", back:"Back", submit:"Submit & Sign", review:"Review",
+  downloadPdf:"Download my copy (PDF)",
+  governing:"The English version of this form is the legally governing version. Spanish and Portuguese are provided for your understanding.",
+  reqWarn:"Please complete the highlighted fields before continuing.",
+  declWarn:"Please check all declaration items to confirm your agreement.",
+  sigWarn:"Please sign in the box before submitting.",
+  photoWarn:"Please choose a photography option.",
+  patchWarn:"Please choose a patch test option.",
+  thanksTitle:"Thank you!",
+  thanksText:"Your consent form has been signed and submitted successfully. You're all set — there's nothing else you need to do. See you at your appointment!",
+  reviewSummary:"Please review your selections, then sign below to complete."
+},
+
+/* ---------- ESPAÑOL ---------- */
+es:{
+  langName:"Español",
+  stepNames:["Idioma","Servicio","Consentimiento","Detalles del Servicio","Historial Médico","Revisar y Firmar"],
+  formTitle:"Formulario de Consentimiento e Historial",
+  intro:"Este formulario está diseñado para que cuente con la información necesaria para tomar una decisión plenamente informada sobre su procedimiento de maquillaje permanente. Lea cada sección con atención. Completar y firmar este formulario indica su comprensión y consentimiento del procedimiento seleccionado.",
+  chooseLang:"Por favor, elija su idioma",
+  chooseLangSub:"Puede cambiarlo en cualquier momento con los botones de arriba.",
+  chooseService:"¿Qué servicio recibirá hoy?",
+  chooseServiceSub:"Seleccione un servicio. Si recibirá más de un procedimiento hoy, complete un formulario por servicio.",
+  svc:{eyebrows:{t:"Cejas",d:"Microblading · Ombre/Polvo · Combo · Nano · Pelo a Pelo",i:"✦"},
+       lips:{t:"Labios",d:"Lip Blush · Blush Suave · Ombre · Labios Oscuros",i:"❀"},
+       eyeliner:{t:"Delineado",d:"Clásico · Línea de Pestañas · Ahumado · Realce",i:"◗"}},
+  chooseTech:"Seleccione su técnica",
+  pigmentLabel:"Color / Pigmento (lo completa con su artista — opcional)",
+  generalTitle:"Información General",
+  generalP1:"Este formulario está diseñado para que cuente con la información necesaria para tomar una decisión plenamente informada sobre su procedimiento de maquillaje permanente. Lea cada sección con atención y no dude en hacerle a su artista cualquier pregunta antes de firmar. Completar y firmar este formulario indica su comprensión y consentimiento del procedimiento seleccionado.",
+  generalP2:"Todos los instrumentos que entran en contacto con la piel o los fluidos corporales son de un solo uso y se desechan inmediatamente después de usarse. Se siguen estrictamente las pautas de control de contaminación cruzada conforme a los protocolos estándar sobre patógenos transmitidos por la sangre.",
+  risksTitle:"Riesgos y Complicaciones Posibles (Todos los Servicios)",
+  risksIntro:"Los siguientes riesgos aplican a todos los procedimientos de maquillaje permanente. Los riesgos específicos del servicio se detallan en la siguiente sección.",
+  risksAll:[
+    ["Dolor / Molestia","Puede haber alguna molestia incluso con anestésico tópico."],
+    ["Infección","Rara pero posible. Mantenga el área limpia; tóquela solo con las manos recién lavadas."],
+    ["Pigmentación Despareja","Puede deberse a una mala cicatrización o al tipo de piel. Corregible en el retoque."],
+    ["Reacción Alérgica","Al pigmento, anestésico o productos de cuidado posterior. Prueba de alergia disponible a pedido (5–7 días antes)."],
+    ["Hinchazón o Hematomas","Comunes los primeros 1–5 días. Una bolsa de hielo envuelta y limpia puede ayudar."],
+    ["Anestésicos","Pueden usarse lidocaína, prilocaína, benzocaína, tetracaína y epinefrina. Informe todas las alergias conocidas."],
+    ["Resonancia (MRI)","Los pigmentos metálicos pueden causar una leve sensación. Informe siempre a su radiólogo sobre el maquillaje permanente."],
+    ["Migración del Pigmento","En casos raros, el pigmento puede extenderse levemente más allá del área de aplicación."],
+    ["Hiper / Hipopigmentación","Son posibles cambios en el pigmento de la piel circundante, especialmente en tonos de piel más oscuros."],
+    ["Queloide / Cicatrices","Mayor riesgo en personas propensas a queloides. Consulte a un médico antes de proceder."]
+  ],
+  patchTitle:"Prueba de Alergia (Patch Test)",
+  patchText:"Hay una prueba de alergia disponible 5–7 días antes de su cita para verificar la sensibilidad. Como alternativa, puede optar por usar cosméticos tradicionales y declinar el procedimiento en cualquier momento. Indique su elección:",
+  patchWaive:"Renuncio a la prueba de alergia",
+  patchRequest:"Solicito una prueba de alergia",
+  declTitle:"Declaración de Consentimiento",
+  declIntro:"Marque cada línea para confirmar su comprensión y conformidad.",
+  declItems:[
+    "He recibido y revisado las instrucciones de cuidado posterior y las seguiré cuidadosamente.",
+    "Entiendo que este procedimiento puede causar molestia, hinchazón, enrojecimiento o hematomas temporales.",
+    "Entiendo que Retin-A, Renova, ácidos alfa hidroxi, ácidos glicólicos y productos exfoliantes similares NO deben aplicarse en el área tratada.",
+    "Entiendo que la exposición solar prolongada, las camas de bronceado, las piscinas y los cosméticos aplicados demasiado pronto pueden afectar negativamente la retención y duración del pigmento.",
+    "Informaré a todos los profesionales médicos pertinentes — incluidos radiólogos y cirujanos — sobre mi maquillaje permanente, especialmente antes de cualquier resonancia o procedimiento facial.",
+    "Acepto la responsabilidad por el color, la forma y el diseño conversados y aprobados con mi artista durante la consulta.",
+    "Entiendo que el pigmento se desvanecerá con el tiempo y que debe programarse un retoque entre 4 y 6 semanas después de la sesión inicial. Los retoques no pueden realizarse después de la ventana de 6 semanas para ningún servicio. (Costo del retoque: "+ "$150" +".)",
+    "Reconozco los riesgos inherentes que incluyen, entre otros, infección, migración del pigmento, mala retención del color e hiperpigmentación.",
+    "Entiendo que el precio de la sesión inicial NO incluye la cita de retoque de 4–6 semanas.",
+    "Las sesiones de mantenimiento anual no incluyen citas de retoque.",
+    "Entiendo que los resultados varían según el tipo de piel, el estilo de vida y el cuidado posterior de cada persona, y que no se puede garantizar ningún resultado específico.",
+    "Confirmo que no estoy embarazada ni amamantando, o que se lo he informado a mi artista y recibí autorización médica.",
+    "Confirmo que no he consumido alcohol ni medicamentos anticoagulantes (aspirina, ibuprofeno, aceite de pescado, vitamina E) en las 24 horas previas a mi cita."
+  ],
+  declInitials:"Sus iniciales",
+  medTitle:"Historial Médico del Cliente",
+  medIntro:"Complete todos los campos con precisión. Esta información es estrictamente confidencial y se usa únicamente para garantizar su seguridad durante el procedimiento.",
+  personal:"Información Personal",
+  f_fullname:"Nombre Completo", f_dob:"Fecha de Nacimiento", f_age:"Edad",
+  f_phone:"Teléfono", f_email:"Correo Electrónico", f_address:"Dirección",
+  f_city:"Ciudad", f_state:"Estado / Código Postal", f_ec_name:"Contacto de Emergencia",
+  f_ec_phone:"Teléfono de Emergencia", f_id:"N.º de Identificación / Licencia",
+  condTitle:"Condiciones Médicas",
+  condIntro:"Toque Sí o No en cada una. Si marca Sí, agregue detalles en el cuadro de notas que aparece.",
+  conditions:[
+    "Antecedentes de MRSA o infecciones de la piel","Bótox","Diabetes (Tipo 1 / Tipo 2)","Dermatitis Seborreica",
+    "Piel Seca o Grasa (especifique)","Hepatitis A, B, C o D","Cirugía de Lifting de Cejas o Frente",
+    "Sangrado Fácil / Trastornos de Coagulación","Cirugía de Lifting Facial","Alcoholismo o consumo excesivo de alcohol",
+    "Afecciones Cardíacas / Marcapasos","Dificultad para adormecer con anestésico dental","Peeling Químico",
+    "Embarazo o Lactancia","Tinte de Cejas o Pestañas (reciente)","Enfermedad Autoinmune (p. ej., Lupus, Psoriasis)",
+    "Cáncer","Accutane o tratamiento recetado para el acné (debe suspenderse 1 año antes)","Quimioterapia o Radiación (reciente o en curso)",
+    "Exposición solar o bronceado artificial (reciente)","Tumores o Quistes (zona facial/cuero cabelludo)","Rosácea o Eczema",
+    "Trastorno de Tiroides","VIH / SIDA","Anticoagulantes (Aspirina, Ibuprofeno, Coumadin, Xarelto, etc.)",
+    "Alergia a Lidocaína, Tetracaína, Epinefrina o similares","Alergia a metales, alimentos u otras sustancias",
+    "Tendencia a cicatrices queloides","Inyecciones faciales recientes (relleno, PRP, etc.)","Virus del Herpes Simple (HSV-1 / HSV-2 — herpes labial)",
+    "Uso de Retin-A, Ácido Glicólico o Ácido Alfa Hidroxi","Otras condiciones no mencionadas arriba"
+  ],
+  medsLabel:"Medicamentos y Suplementos Actuales — indique todos los medicamentos, vitaminas y suplementos",
+  medConfirm:"Confirmo que toda la información proporcionada es verdadera y precisa según mi leal saber y entender. Entiendo que ocultar información médica relevante puede afectar la seguridad y el resultado de mi procedimiento.",
+  yes:"Sí", no:"No", notes:"Notas / detalles",
+  finalTitle:"Consentimiento de Fotografía y Firma",
+  photoTitle:"Consentimiento de Fotografía",
+  photoText:"Autorizo a "+ "Orlando Microblading by Kika Bergmann" +" a tomar fotografías de antes y después de mi procedimiento con fines de registro, educativos y/o de marketing, incluidas las redes sociales.",
+  photoYes:"Sí, pueden usar mis fotos",
+  photoNo:"No, no usen mis fotos",
+  certTitle:"Certificación Final",
+  certText:"Certifico que he leído — o que me han leído — el contenido completo de este formulario de consentimiento, incluido el historial médico, la declaración de consentimiento y el anexo específico del servicio anterior. He tenido la oportunidad de hacer preguntas y todas fueron respondidas a mi satisfacción. Autorizo a Kika Bergmann como mi artista de maquillaje permanente a realizar el procedimiento de hoy. Mi firma a continuación aplica a todo este documento.",
+  sigLabel:"Firme aquí con el dedo o el mouse",
+  sigHint:"Firme aquí",
+  clearSig:"Borrar",
+  dateAuto:"Fecha",
+  next:"Continuar", back:"Atrás", submit:"Enviar y Firmar", review:"Revisar",
+  downloadPdf:"Descargar mi copia (PDF)",
+  governing:"La versión en inglés de este formulario es la versión legalmente vinculante. El español y el portugués se ofrecen para su comprensión.",
+  reqWarn:"Complete los campos resaltados antes de continuar.",
+  declWarn:"Marque todos los puntos de la declaración para confirmar su conformidad.",
+  sigWarn:"Firme en el recuadro antes de enviar.",
+  photoWarn:"Elija una opción de fotografía.",
+  patchWarn:"Elija una opción de prueba de alergia.",
+  thanksTitle:"¡Gracias!",
+  thanksText:"Su formulario de consentimiento ha sido firmado y enviado correctamente. ¡Todo listo! No necesita hacer nada más. ¡Nos vemos en su cita!",
+  reviewSummary:"Revise sus selecciones y luego firme abajo para completar."
+},
+
+/* ---------- PORTUGUÊS ---------- */
+pt:{
+  langName:"Português",
+  stepNames:["Idioma","Serviço","Consentimento","Detalhes do Serviço","Histórico Médico","Revisar e Assinar"],
+  formTitle:"Formulário de Consentimento e Anamnese",
+  intro:"Este formulário foi elaborado para que você tenha as informações necessárias para tomar uma decisão plenamente informada sobre seu procedimento de maquiagem permanente. Leia cada seção com atenção. Preencher e assinar este formulário indica sua compreensão e consentimento do procedimento selecionado.",
+  chooseLang:"Por favor, escolha seu idioma",
+  chooseLangSub:"Você pode trocar a qualquer momento nos botões acima.",
+  chooseService:"Qual serviço você fará hoje?",
+  chooseServiceSub:"Selecione um serviço. Se for fazer mais de um procedimento hoje, preencha um formulário por serviço.",
+  svc:{eyebrows:{t:"Sobrancelhas",d:"Microblading · Ombre/Esfumado · Combo · Nano · Fio a Fio",i:"✦"},
+       lips:{t:"Lábios",d:"Lip Blush · Blush Suave · Ombre · Lábios Escuros",i:"❀"},
+       eyeliner:{t:"Delineador",d:"Clássico · Rente aos Cílios · Esfumado · Realce",i:"◗"}},
+  chooseTech:"Selecione sua técnica",
+  pigmentLabel:"Cor / Pigmento (preenchido com sua artista — opcional)",
+  generalTitle:"Informações Gerais",
+  generalP1:"Este formulário foi elaborado para que você tenha as informações necessárias para tomar uma decisão plenamente informada sobre seu procedimento de maquiagem permanente. Leia cada seção com atenção e não hesite em fazer qualquer pergunta à sua artista antes de assinar. Preencher e assinar este formulário indica sua compreensão e consentimento do procedimento selecionado.",
+  generalP2:"Todos os instrumentos que entram em contato com a pele ou fluidos corporais são de uso único e descartados imediatamente após o uso. As diretrizes de controle de contaminação cruzada são rigorosamente seguidas, em conformidade com os protocolos padrão de patógenos transmitidos pelo sangue.",
+  risksTitle:"Riscos e Complicações Possíveis (Todos os Serviços)",
+  risksIntro:"Os riscos a seguir aplicam-se a todos os procedimentos de maquiagem permanente. Os riscos específicos do serviço estão detalhados na próxima seção.",
+  risksAll:[
+    ["Dor / Desconforto","Algum desconforto pode ocorrer mesmo com anestésico tópico."],
+    ["Infecção","Rara, mas possível. Mantenha a área limpa; toque apenas com as mãos recém-lavadas."],
+    ["Pigmentação Irregular","Pode resultar de má cicatrização ou tipo de pele. Corrigível no retoque."],
+    ["Reação Alérgica","Ao pigmento, anestésico ou produtos de cuidado pós-procedimento. Teste de alergia disponível sob solicitação (5–7 dias antes)."],
+    ["Inchaço ou Hematomas","Comuns nos primeiros 1–5 dias. Uma bolsa de gelo limpa e envolvida pode ajudar."],
+    ["Anestésicos","Lidocaína, prilocaína, benzocaína, tetracaína e epinefrina podem ser usadas. Informe todas as alergias conhecidas."],
+    ["Ressonância (MRI)","Pigmentos metálicos podem causar uma leve sensação. Sempre informe seu radiologista sobre a maquiagem permanente."],
+    ["Migração do Pigmento","Em casos raros, o pigmento pode se espalhar levemente além da área de aplicação."],
+    ["Hiper / Hipopigmentação","Alterações no pigmento da pele ao redor são possíveis, especialmente em tons de pele mais escuros."],
+    ["Queloide / Cicatrizes","Maior risco para pessoas propensas a queloides. Consulte um médico antes de prosseguir."]
+  ],
+  patchTitle:"Teste de Alergia (Patch Test)",
+  patchText:"Há um teste de alergia disponível 5–7 dias antes do seu agendamento para verificar a sensibilidade. Como alternativa, você pode optar por usar cosméticos tradicionais e recusar o procedimento a qualquer momento. Indique sua escolha:",
+  patchWaive:"Dispenso o teste de alergia",
+  patchRequest:"Solicito um teste de alergia",
+  declTitle:"Declaração de Consentimento",
+  declIntro:"Marque cada linha para confirmar sua compreensão e concordância.",
+  declItems:[
+    "Recebi e revisei as instruções de cuidado pós-procedimento e as seguirei cuidadosamente.",
+    "Entendo que este procedimento pode causar desconforto, inchaço, vermelhidão ou hematomas temporários.",
+    "Entendo que Retin-A, Renova, ácidos alfa-hidroxi, ácidos glicólicos e produtos esfoliantes semelhantes NÃO devem ser aplicados na área tratada.",
+    "Entendo que exposição solar prolongada, câmaras de bronzeamento, piscinas e cosméticos aplicados cedo demais podem prejudicar a retenção e a durabilidade do pigmento.",
+    "Informarei todos os profissionais de saúde pertinentes — incluindo radiologistas e cirurgiões — sobre minha maquiagem permanente, especialmente antes de qualquer ressonância ou procedimento facial.",
+    "Aceito a responsabilidade pela cor, formato e design conversados e aprovados com minha artista durante a consulta.",
+    "Entendo que o pigmento desbota com o tempo e que um retoque deve ser agendado entre 4 e 6 semanas após a sessão inicial. Os retoques não podem ser realizados após a janela de 6 semanas, para nenhum serviço. (Taxa de retoque: "+ "$150" +".)",
+    "Reconheço os riscos inerentes, incluindo, entre outros, infecção, migração do pigmento, má retenção de cor e hiperpigmentação.",
+    "Entendo que o preço da sessão inicial NÃO inclui o agendamento de retoque de 4–6 semanas.",
+    "As sessões de manutenção anual não incluem agendamentos de retoque.",
+    "Entendo que os resultados variam conforme o tipo de pele, o estilo de vida e o cuidado pós-procedimento de cada pessoa, e que nenhum resultado específico pode ser garantido.",
+    "Confirmo que não estou grávida nem amamentando, ou que informei isso à minha artista e recebi liberação médica.",
+    "Confirmo que não consumi álcool nem medicamentos anticoagulantes (aspirina, ibuprofeno, óleo de peixe, vitamina E) nas 24 horas anteriores ao meu agendamento."
+  ],
+  declInitials:"Suas iniciais",
+  medTitle:"Histórico Médico da Cliente",
+  medIntro:"Preencha todos os campos com precisão. Estas informações são estritamente confidenciais e usadas somente para garantir sua segurança durante o procedimento.",
+  personal:"Informações Pessoais",
+  f_fullname:"Nome Completo", f_dob:"Data de Nascimento", f_age:"Idade",
+  f_phone:"Telefone", f_email:"E-mail", f_address:"Endereço",
+  f_city:"Cidade", f_state:"Estado / CEP", f_ec_name:"Contato de Emergência",
+  f_ec_phone:"Telefone de Emergência", f_id:"Nº de Identidade / CNH",
+  condTitle:"Condições Médicas",
+  condIntro:"Toque Sim ou Não em cada uma. Se marcar Sim, adicione detalhes na caixa de notas que aparece.",
+  conditions:[
+    "Histórico de MRSA ou infecções de pele","Botox","Diabetes (Tipo 1 / Tipo 2)","Dermatite Seborreica",
+    "Pele Seca ou Oleosa (especifique)","Hepatite A, B, C ou D","Cirurgia de Lifting de Sobrancelha ou Testa",
+    "Sangramento Fácil / Distúrbios de Coagulação","Cirurgia de Lifting Facial","Alcoolismo ou consumo excessivo de álcool",
+    "Problemas Cardíacos / Marca-passo","Dificuldade de anestesiar com anestésico dentário","Peeling Químico",
+    "Gravidez ou Amamentação","Tintura de Sobrancelha ou Cílios (recente)","Doença Autoimune (ex.: Lúpus, Psoríase)",
+    "Câncer","Roacutan ou tratamento prescrito para acne (deve parar 1 ano antes)","Quimioterapia ou Radioterapia (recente ou em andamento)",
+    "Exposição solar ou bronzeamento artificial (recente)","Tumores ou Cistos (área facial/couro cabeludo)","Rosácea ou Eczema",
+    "Distúrbio da Tireoide","HIV / AIDS","Anticoagulantes (Aspirina, Ibuprofeno, Coumadin, Xarelto, etc.)",
+    "Alergia a Lidocaína, Tetracaína, Epinefrina ou similares","Alergia a metais, alimentos ou outras substâncias",
+    "Tendência a cicatrizes queloides","Injeções faciais recentes (preenchimento, PRP, etc.)","Vírus do Herpes Simples (HSV-1 / HSV-2 — herpes labial)",
+    "Uso de Retin-A, Ácido Glicólico ou Ácido Alfa-Hidroxi","Outras condições não listadas acima"
+  ],
+  medsLabel:"Medicamentos e Suplementos Atuais — liste todos os medicamentos, vitaminas e suplementos",
+  medConfirm:"Confirmo que todas as informações fornecidas são verdadeiras e precisas, no melhor do meu conhecimento. Entendo que omitir informações médicas relevantes pode afetar a segurança e o resultado do meu procedimento.",
+  yes:"Sim", no:"Não", notes:"Notas / detalhes",
+  finalTitle:"Consentimento de Imagem e Assinatura",
+  photoTitle:"Consentimento de Imagem",
+  photoText:"Autorizo a "+ "Orlando Microblading by Kika Bergmann" +" a tirar fotografias de antes e depois do meu procedimento para fins de registro, educacionais e/ou de marketing, incluindo redes sociais.",
+  photoYes:"Sim, podem usar minhas fotos",
+  photoNo:"Não, não usem minhas fotos",
+  certTitle:"Certificação Final",
+  certText:"Certifico que li — ou que me leram — o conteúdo completo deste formulário de consentimento, incluindo o histórico médico, a declaração de consentimento e o anexo específico do serviço acima. Tive a oportunidade de fazer perguntas e todas foram respondidas a meu contento. Autorizo Kika Bergmann como minha artista de maquiagem permanente a realizar o procedimento de hoje. Minha assinatura abaixo aplica-se a todo este documento.",
+  sigLabel:"Assine aqui com o dedo ou o mouse",
+  sigHint:"Assine aqui",
+  clearSig:"Limpar",
+  dateAuto:"Data",
+  next:"Continuar", back:"Voltar", submit:"Enviar e Assinar", review:"Revisar",
+  downloadPdf:"Baixar minha cópia (PDF)",
+  governing:"A versão em inglês deste formulário é a versão juridicamente válida. O espanhol e o português são fornecidos para sua compreensão.",
+  reqWarn:"Preencha os campos destacados antes de continuar.",
+  declWarn:"Marque todos os itens da declaração para confirmar sua concordância.",
+  sigWarn:"Assine no quadro antes de enviar.",
+  photoWarn:"Escolha uma opção de imagem.",
+  patchWarn:"Escolha uma opção de teste de alergia.",
+  thanksTitle:"Obrigada!",
+  thanksText:"Seu formulário de consentimento foi assinado e enviado com sucesso. Tudo certo! Não precisa fazer mais nada. Até o seu atendimento!",
+  reviewSummary:"Revise suas escolhas e assine abaixo para concluir."
+}
+};
+
+/* =====================================================================
+   ADDENDUMS (per service) — EN / ES / PT
+===================================================================== */
+const ADD = {
+en:{
+  eyebrows:{
+    title:"Service Addendum — Eyebrows",
+    overview:["Eyebrow procedures — including Microblading, Ombre/Powder, Combo (Microblading + Powder), and Hair Strokes — involve inserting cosmetic pigment into the dermal layer of the skin and are considered a form of tattooing. Although results are excellent in most cases, no specific outcome can be guaranteed.",
+      "Initially, the color will appear darker and more defined than the final healed result. Within 7–10 days, the pigment lightens 40–50%, revealing a softer, more natural shade. Pigment is semi-permanent and will fade over time; maintenance is recommended every 6–24 months depending on skin type, lifestyle, and aftercare compliance."],
+    techniques:["Microblading","Ombre / Powder","Combo (Micro + Powder)","Hair Strokes"],
+    prevQ:"Have you had previous permanent makeup or tattooing on your brows?",
+    risks:[
+      ["Asymmetry","The human face is naturally asymmetrical; adjustments may be made at the touch-up appointment."],
+      ["Pigment fading or color shift","Some pigments may shift in tone as they fade over time depending on skin undertone."],
+      ["Stroke blurring","Microblading hair strokes may blur slightly over time as the skin ages or due to oily skin type."],
+      ["Scar tissue","Repeated procedures over the same area may affect skin texture and pigment retention."],
+      ["Hair follicle sensitivity","In rare cases, repeated trauma near hair follicles can affect natural brow hair growth."],
+      ["Uneven healing","One side may heal differently than the other; this is common and can be corrected at the touch-up."]
+    ],
+    consent:"I have read and understood the information in this Eyebrow Service Addendum. I understand the procedure, the 4–6-week touch-up policy, the risks involved, and the previous work disclosure (if applicable). I consent to proceed."
+  },
+  lips:{
+    title:"Service Addendum — Lip Blush",
+    overview:["Lip Blush is a semi-permanent cosmetic tattoo procedure that deposits pigment into the lip tissue to enhance color, symmetry, and definition. It is not a traditional lip tattoo — the result is a soft, diffused tint that mimics the appearance of a natural, healthy lip color. This is a simple, minimally invasive procedure.",
+      "Healing typically takes 4–6 weeks, during which the color will appear 30–50% more intense before softening to the final shade. Full results cannot be evaluated until healing is complete. Pigment longevity is typically 2–4 years. Annual maintenance is recommended to keep the color looking fresh and vibrant over time, as pigment naturally fades with sun exposure, skincare routines, and the body's natural aging process."],
+    techniques:["Lip Blush","Full Lip Color","Ombre Lips","Lip Liner Only","Dark Lips"],
+    specialTitle:"Mandatory — Herpes (HSV) Disclosure",
+    specialText:"If you have ever had a cold sore or been diagnosed with Herpes Simplex Virus (HSV), a lip procedure may trigger an outbreak and affect healing and pigment retention. If yes, it is recommended that you contact your physician to request an antiviral medication prescription. The medication should be taken for the first 3 days after the procedure, as directed by your doctor.",
+    specialQ:"Have you ever had a cold sore or been diagnosed with HSV?",
+    prevQ:"Have you had previous permanent makeup, lip liner, or tattooing on your lips?",
+    risks:[
+      ["HSV / Cold Sore Outbreak","Lip trauma can trigger cold sores in susceptible individuals."],
+      ["Uneven color","Lips are naturally uneven in pigmentation; multiple sessions may be needed for full saturation."],
+      ["Swelling","Lips typically swell 24–48 hours post-procedure, temporarily altering appearance."],
+      ["Color shift","Lip pigment can shift warmer or cooler during healing depending on individual skin chemistry."],
+      ["Dryness and peeling","The outer lip skin will peel 3–7 days post-procedure. Do NOT pick or peel — this will pull pigment."],
+      ["Filler interaction","If you have lip filler, wait at least 4 weeks before a lip blush procedure and inform your artist."],
+      ["Sun sensitivity","UV exposure accelerates pigment fading in the lip area. SPF lip balm is strongly recommended."]
+    ],
+    consent:"I have read and understood the information in this Lip Blush Service Addendum. I understand the procedure, the 4–6-week touch-up policy, the HSV disclosure, the risks involved, and the previous work disclosure (if applicable). I consent to proceed."
+  },
+  eyeliner:{
+    title:"Service Addendum — Eyeliner",
+    overview:["Permanent eyeliner is a semi-permanent cosmetic tattoo that deposits pigment along the lash line or eyelid to define and enhance the eyes. Styles range from a subtle lash enhancement to a defined liner look, depending on the style selected. This is a simple, minimally invasive line procedure.",
+      "The eyelid area is delicate and highly vascular, meaning swelling and bruising are common and expected, resolving within 3–5 days. Color lightens 30–50% after healing. Pigment typically lasts 2–5 years. Annual maintenance is recommended to keep the color looking fresh and vibrant over time, as pigment naturally fades with sun exposure, skincare routines, and the body's natural aging process."],
+    techniques:["Classic Eyeliner","Lash Line","Smoke Eyeliner","Fix Eyeliner"],
+    specialTitle:"Mandatory — Contact Lens Disclosure",
+    specialText:"IMPORTANT: Contact lens wearers must remove lenses BEFORE the procedure and must NOT wear contact lenses for a minimum of 72 hours (3 days) after the procedure, or until all swelling, redness, and discharge have fully resolved. Please bring your glasses to your appointment.",
+    specialQ:"Do you currently wear contact lenses?",
+    prevQ:"Have you had previous permanent eyeliner or tattooing on your eyelids?",
+    risks:[
+      ["Swelling and bruising","Common and expected; typically resolves within 3–5 days."],
+      ["Eye sensitivity","Temporary tearing, redness, or light sensitivity is normal immediately after the procedure."],
+      ["Stye or infection","Rare but possible. Notify your artist immediately if symptoms develop."],
+      ["Asymmetry","The eyes are rarely perfectly symmetrical; shape adjustments can be made at the touch-up."],
+      ["Pigment migration","In rare cases, pigment can spread slightly, especially on loose or thin eyelid skin."],
+      ["Lash impact","Extremely rare, but trauma near hair follicles can temporarily affect lash growth in the treated area."],
+      ["MRI precaution","Notify your radiologist or MRI technician of all permanent cosmetics before any scan."],
+      ["Vision changes","Temporary blurred vision or watery eyes are normal immediately after the procedure and resolve quickly."]
+    ],
+    consent:"I have read and understood the information in this Eyeliner Service Addendum. I understand the procedure, the 4–6-week touch-up policy, the contact lens requirement, the risks involved, and the previous work disclosure (if applicable). I consent to proceed."
+  }
+},
+es:{
+  eyebrows:{
+    title:"Anexo de Servicio — Cejas",
+    overview:["Los procedimientos de cejas — incluidos Microblading, Ombre/Polvo, Combo (Microblading + Polvo) y Pelo a Pelo — implican insertar pigmento cosmético en la capa dérmica de la piel y se consideran una forma de tatuaje. Aunque los resultados son excelentes en la mayoría de los casos, no se puede garantizar ningún resultado específico.",
+      "Inicialmente, el color se verá más oscuro y definido que el resultado final cicatrizado. En 7–10 días, el pigmento aclara un 40–50%, revelando un tono más suave y natural. El pigmento es semipermanente y se desvanecerá con el tiempo; se recomienda mantenimiento cada 6–24 meses según el tipo de piel, el estilo de vida y el cumplimiento del cuidado posterior."],
+    techniques:["Microblading","Ombre / Polvo","Combo (Micro + Polvo)","Pelo a Pelo"],
+    prevQ:"¿Ha tenido maquillaje permanente o tatuaje previo en sus cejas?",
+    risks:[
+      ["Asimetría","El rostro humano es naturalmente asimétrico; se pueden hacer ajustes en la cita de retoque."],
+      ["Desvanecimiento o cambio de color","Algunos pigmentos pueden cambiar de tono al desvanecerse con el tiempo según el subtono de la piel."],
+      ["Difuminado de trazos","Los trazos del microblading pueden difuminarse levemente con el tiempo a medida que la piel envejece o por piel grasa."],
+      ["Tejido cicatricial","Procedimientos repetidos sobre la misma área pueden afectar la textura de la piel y la retención del pigmento."],
+      ["Sensibilidad del folículo piloso","En casos raros, el trauma repetido cerca de los folículos puede afectar el crecimiento natural del vello de las cejas."],
+      ["Cicatrización despareja","Un lado puede cicatrizar distinto del otro; es común y puede corregirse en el retoque."]
+    ],
+    consent:"He leído y comprendido la información de este Anexo de Servicio de Cejas. Entiendo el procedimiento, la política de retoque de 4–6 semanas, los riesgos involucrados y la declaración de trabajo previo (si aplica). Consiento proceder."
+  },
+  lips:{
+    title:"Anexo de Servicio — Lip Blush",
+    overview:["El Lip Blush es un procedimiento de tatuaje cosmético semipermanente que deposita pigmento en el tejido de los labios para realzar el color, la simetría y la definición. No es un tatuaje de labios tradicional — el resultado es un tinte suave y difuminado que imita la apariencia de un color de labio natural y saludable. Es un procedimiento simple y mínimamente invasivo.",
+      "La cicatrización suele tardar 4–6 semanas, durante las cuales el color se verá 30–50% más intenso antes de suavizarse al tono final. Los resultados completos no pueden evaluarse hasta que la cicatrización termine. La duración del pigmento suele ser de 2–4 años. Se recomienda mantenimiento anual para mantener el color fresco y vibrante, ya que el pigmento se desvanece naturalmente con la exposición solar, las rutinas de cuidado de la piel y el envejecimiento natural del cuerpo."],
+    techniques:["Lip Blush","Color de Labio Completo","Labios Ombre","Solo Delineado de Labios","Labios Oscuros"],
+    specialTitle:"Obligatorio — Declaración de Herpes (HSV)",
+    specialText:"Si alguna vez ha tenido un herpes labial o ha sido diagnosticado con el Virus del Herpes Simple (HSV), un procedimiento de labios puede desencadenar un brote y afectar la cicatrización y la retención del pigmento. Si responde que sí, se recomienda contactar a su médico para solicitar una receta de medicamento antiviral. El medicamento debe tomarse durante los primeros 3 días después del procedimiento, según las indicaciones de su médico.",
+    specialQ:"¿Alguna vez ha tenido herpes labial o ha sido diagnosticado con HSV?",
+    prevQ:"¿Ha tenido maquillaje permanente, delineado o tatuaje previo en sus labios?",
+    risks:[
+      ["Brote de HSV / Herpes Labial","El trauma en los labios puede desencadenar herpes labial en personas susceptibles."],
+      ["Color desparejo","Los labios tienen pigmentación naturalmente despareja; pueden necesitarse varias sesiones para la saturación completa."],
+      ["Hinchazón","Los labios suelen hincharse 24–48 horas después del procedimiento, alterando temporalmente la apariencia."],
+      ["Cambio de color","El pigmento de los labios puede cambiar a un tono más cálido o frío durante la cicatrización según la química de la piel."],
+      ["Sequedad y descamación","La piel externa de los labios se descamará 3–7 días después. NO la arranque ni la pele — esto retirará pigmento."],
+      ["Interacción con relleno","Si tiene relleno de labios, espere al menos 4 semanas antes de un lip blush e informe a su artista."],
+      ["Sensibilidad al sol","La exposición UV acelera el desvanecimiento del pigmento en los labios. Se recomienda bálsamo labial con SPF."]
+    ],
+    consent:"He leído y comprendido la información de este Anexo de Servicio de Lip Blush. Entiendo el procedimiento, la política de retoque de 4–6 semanas, la declaración de HSV, los riesgos involucrados y la declaración de trabajo previo (si aplica). Consiento proceder."
+  },
+  eyeliner:{
+    title:"Anexo de Servicio — Delineado",
+    overview:["El delineado permanente es un tatuaje cosmético semipermanente que deposita pigmento a lo largo de la línea de las pestañas o el párpado para definir y realzar los ojos. Los estilos van desde un realce sutil de pestañas hasta un delineado definido, según el estilo seleccionado. Es un procedimiento de línea simple y mínimamente invasivo.",
+      "El área del párpado es delicada y muy vascularizada, por lo que la hinchazón y los hematomas son comunes y esperables, resolviéndose en 3–5 días. El color aclara 30–50% después de cicatrizar. El pigmento suele durar 2–5 años. Se recomienda mantenimiento anual para mantener el color fresco y vibrante, ya que el pigmento se desvanece naturalmente con la exposición solar, las rutinas de cuidado de la piel y el envejecimiento natural del cuerpo."],
+    techniques:["Delineado Clásico","Línea de Pestañas","Delineado Ahumado","Corrección de Delineado"],
+    specialTitle:"Obligatorio — Declaración de Lentes de Contacto",
+    specialText:"IMPORTANTE: Quienes usan lentes de contacto deben quitárselos ANTES del procedimiento y NO deben usarlos durante un mínimo de 72 horas (3 días) después, o hasta que la hinchazón, el enrojecimiento y la secreción se hayan resuelto por completo. Por favor, traiga sus anteojos a la cita.",
+    specialQ:"¿Usa actualmente lentes de contacto?",
+    prevQ:"¿Ha tenido delineado permanente o tatuaje previo en sus párpados?",
+    risks:[
+      ["Hinchazón y hematomas","Comunes y esperables; suelen resolverse en 3–5 días."],
+      ["Sensibilidad ocular","Lagrimeo, enrojecimiento o sensibilidad a la luz temporales son normales justo después del procedimiento."],
+      ["Orzuelo o infección","Raro pero posible. Avise a su artista de inmediato si aparecen síntomas."],
+      ["Asimetría","Los ojos rara vez son perfectamente simétricos; los ajustes de forma pueden hacerse en el retoque."],
+      ["Migración del pigmento","En casos raros, el pigmento puede extenderse levemente, especialmente en piel del párpado floja o fina."],
+      ["Impacto en las pestañas","Extremadamente raro, pero el trauma cerca de los folículos puede afectar temporalmente el crecimiento de las pestañas en el área tratada."],
+      ["Precaución con MRI","Informe a su radiólogo o técnico de resonancia sobre todos los cosméticos permanentes antes de cualquier estudio."],
+      ["Cambios en la visión","Visión borrosa temporal o lagrimeo son normales justo después del procedimiento y se resuelven rápido."]
+    ],
+    consent:"He leído y comprendido la información de este Anexo de Servicio de Delineado. Entiendo el procedimiento, la política de retoque de 4–6 semanas, el requisito de lentes de contacto, los riesgos involucrados y la declaración de trabajo previo (si aplica). Consiento proceder."
+  }
+},
+pt:{
+  eyebrows:{
+    title:"Anexo de Serviço — Sobrancelhas",
+    overview:["Os procedimentos de sobrancelha — incluindo Microblading, Ombre/Esfumado, Combo (Microblading + Esfumado) e Fio a Fio — envolvem inserir pigmento cosmético na camada dérmica da pele e são considerados uma forma de tatuagem. Embora os resultados sejam excelentes na maioria dos casos, nenhum resultado específico pode ser garantido.",
+      "Inicialmente, a cor parecerá mais escura e definida do que o resultado final cicatrizado. Em 7–10 dias, o pigmento clareia 40–50%, revelando um tom mais suave e natural. O pigmento é semipermanente e desbota com o tempo; recomenda-se manutenção a cada 6–24 meses, conforme o tipo de pele, o estilo de vida e a adesão ao cuidado pós-procedimento."],
+    techniques:["Microblading","Ombre / Esfumado","Combo (Micro + Esfumado)","Fio a Fio"],
+    prevQ:"Você já fez maquiagem permanente ou tatuagem prévia nas sobrancelhas?",
+    risks:[
+      ["Assimetria","O rosto humano é naturalmente assimétrico; ajustes podem ser feitos no retoque."],
+      ["Desbotamento ou mudança de cor","Alguns pigmentos podem mudar de tom ao desbotar com o tempo, conforme o subtom da pele."],
+      ["Borramento dos fios","Os fios do microblading podem borrar levemente com o tempo, conforme a pele envelhece ou por pele oleosa."],
+      ["Tecido cicatricial","Procedimentos repetidos na mesma área podem afetar a textura da pele e a retenção do pigmento."],
+      ["Sensibilidade do folículo","Em casos raros, o trauma repetido perto dos folículos pode afetar o crescimento natural dos pelos da sobrancelha."],
+      ["Cicatrização irregular","Um lado pode cicatrizar diferente do outro; é comum e pode ser corrigido no retoque."]
+    ],
+    consent:"Li e compreendi as informações deste Anexo de Serviço de Sobrancelhas. Entendo o procedimento, a política de retoque de 4–6 semanas, os riscos envolvidos e a declaração de trabalho anterior (se aplicável). Consinto em prosseguir."
+  },
+  lips:{
+    title:"Anexo de Serviço — Lip Blush",
+    overview:["O Lip Blush é um procedimento de tatuagem cosmética semipermanente que deposita pigmento no tecido dos lábios para realçar cor, simetria e definição. Não é uma tatuagem de lábio tradicional — o resultado é um tom suave e difuso que imita a aparência de uma cor de lábio natural e saudável. É um procedimento simples e minimamente invasivo.",
+      "A cicatrização costuma levar 4–6 semanas, durante as quais a cor parecerá 30–50% mais intensa antes de suavizar até o tom final. Os resultados completos só podem ser avaliados após a cicatrização. A durabilidade do pigmento costuma ser de 2–4 anos. Recomenda-se manutenção anual para manter a cor viva e vibrante, pois o pigmento desbota naturalmente com a exposição solar, as rotinas de skincare e o envelhecimento natural do corpo."],
+    techniques:["Lip Blush","Cor de Lábio Completa","Lábios Ombre","Apenas Contorno Labial","Lábios Escuros"],
+    specialTitle:"Obrigatório — Declaração de Herpes (HSV)",
+    specialText:"Se você já teve herpes labial ou foi diagnosticada com o Vírus do Herpes Simples (HSV), um procedimento nos lábios pode desencadear uma crise e afetar a cicatrização e a retenção do pigmento. Se sim, recomenda-se contatar seu médico para solicitar uma receita de medicamento antiviral. O medicamento deve ser tomado nos primeiros 3 dias após o procedimento, conforme orientação do seu médico.",
+    specialQ:"Você já teve herpes labial ou foi diagnosticada com HSV?",
+    prevQ:"Você já fez maquiagem permanente, contorno labial ou tatuagem prévia nos lábios?",
+    risks:[
+      ["Crise de HSV / Herpes Labial","O trauma nos lábios pode desencadear herpes labial em pessoas suscetíveis."],
+      ["Cor irregular","Os lábios têm pigmentação naturalmente irregular; várias sessões podem ser necessárias para saturação completa."],
+      ["Inchaço","Os lábios costumam inchar 24–48 horas após o procedimento, alterando temporariamente a aparência."],
+      ["Mudança de cor","O pigmento dos lábios pode ficar mais quente ou mais frio durante a cicatrização, conforme a química da pele."],
+      ["Ressecamento e descamação","A pele externa dos lábios descama 3–7 dias após o procedimento. NÃO cutuque nem descame — isso retira o pigmento."],
+      ["Interação com preenchimento","Se tiver preenchimento labial, espere ao menos 4 semanas antes do lip blush e informe sua artista."],
+      ["Sensibilidade ao sol","A exposição UV acelera o desbotamento do pigmento nos lábios. Recomenda-se protetor labial com FPS."]
+    ],
+    consent:"Li e compreendi as informações deste Anexo de Serviço de Lip Blush. Entendo o procedimento, a política de retoque de 4–6 semanas, a declaração de HSV, os riscos envolvidos e a declaração de trabalho anterior (se aplicável). Consinto em prosseguir."
+  },
+  eyeliner:{
+    title:"Anexo de Serviço — Delineador",
+    overview:["O delineador permanente é uma tatuagem cosmética semipermanente que deposita pigmento ao longo da linha dos cílios ou da pálpebra para definir e realçar os olhos. Os estilos vão de um realce sutil dos cílios a um delineado definido, conforme o estilo selecionado. É um procedimento de linha simples e minimamente invasivo.",
+      "A área da pálpebra é delicada e muito vascularizada, por isso inchaço e hematomas são comuns e esperados, resolvendo-se em 3–5 dias. A cor clareia 30–50% após a cicatrização. O pigmento costuma durar 2–5 anos. Recomenda-se manutenção anual para manter a cor viva e vibrante, pois o pigmento desbota naturalmente com a exposição solar, as rotinas de skincare e o envelhecimento natural do corpo."],
+    techniques:["Delineador Clássico","Rente aos Cílios","Delineador Esfumado","Correção de Delineador"],
+    specialTitle:"Obrigatório — Declaração de Lentes de Contato",
+    specialText:"IMPORTANTE: Quem usa lentes de contato deve removê-las ANTES do procedimento e NÃO deve usá-las por no mínimo 72 horas (3 dias) após, ou até que o inchaço, a vermelhidão e a secreção tenham desaparecido completamente. Por favor, traga seus óculos ao agendamento.",
+    specialQ:"Você usa lentes de contato atualmente?",
+    prevQ:"Você já fez delineador permanente ou tatuagem prévia nas pálpebras?",
+    risks:[
+      ["Inchaço e hematomas","Comuns e esperados; costumam resolver-se em 3–5 dias."],
+      ["Sensibilidade ocular","Lacrimejamento, vermelhidão ou sensibilidade à luz temporários são normais logo após o procedimento."],
+      ["Terçol ou infecção","Raro, mas possível. Avise sua artista imediatamente se surgirem sintomas."],
+      ["Assimetria","Os olhos raramente são perfeitamente simétricos; ajustes de formato podem ser feitos no retoque."],
+      ["Migração do pigmento","Em casos raros, o pigmento pode se espalhar levemente, especialmente em pele de pálpebra flácida ou fina."],
+      ["Impacto nos cílios","Extremamente raro, mas o trauma perto dos folículos pode afetar temporariamente o crescimento dos cílios na área tratada."],
+      ["Precaução com MRI","Informe seu radiologista ou técnico de ressonância sobre todos os cosméticos permanentes antes de qualquer exame."],
+      ["Alterações na visão","Visão embaçada temporária ou olhos lacrimejantes são normais logo após o procedimento e passam rápido."]
+    ],
+    consent:"Li e compreendi as informações deste Anexo de Serviço de Delineador. Entendo o procedimento, a política de retoque de 4–6 semanas, a exigência sobre lentes de contato, os riscos envolvidos e a declaração de trabalho anterior (se aplicável). Consinto em prosseguir."
+  }
+}
+};
+
+const TOUCHUP = {
+  en:"TOUCH-UP POLICY: Your touch-up appointment MUST be scheduled between 4 and 6 weeks after your initial session. Touch-ups will NOT be performed after the 6-week window has passed, for any reason. This applies to all services without exception.",
+  es:"POLÍTICA DE RETOQUE: Su cita de retoque DEBE programarse entre 4 y 6 semanas después de su sesión inicial. Los retoques NO se realizarán después de la ventana de 6 semanas, por ningún motivo. Esto aplica a todos los servicios sin excepción.",
+  pt:"POLÍTICA DE RETOQUE: Seu retoque DEVE ser agendado entre 4 e 6 semanas após a sessão inicial. Os retoques NÃO serão realizados após a janela de 6 semanas, por nenhum motivo. Isso se aplica a todos os serviços sem exceção."
+};
+const PREVNOTE = {
+  en:["This procedure will be treated as a correction rather than a new application.","Existing pigment affects how new pigment heals, retains color, and holds shape.","The primary goal of the first correction session is to improve design, shape, and color balance — not a perfect final result in one visit.","Color retention may be lower than expected; results may heal softer or lighter.","A mandatory touch-up is required for all correction work and must be scheduled within 4–6 weeks."],
+  es:["Este procedimiento se tratará como una corrección y no como una aplicación nueva.","El pigmento existente afecta cómo cicatriza el nuevo pigmento, retiene el color y mantiene la forma.","El objetivo principal de la primera sesión de corrección es mejorar el diseño, la forma y el equilibrio de color — no un resultado final perfecto en una sola visita.","La retención de color puede ser menor de lo esperado; los resultados pueden cicatrizar más suaves o claros.","Se requiere un retoque obligatorio para todo trabajo de corrección y debe programarse dentro de 4–6 semanas."],
+  pt:["Este procedimento será tratado como uma correção, e não como uma aplicação nova.","O pigmento existente afeta como o novo pigmento cicatriza, retém a cor e mantém o formato.","O objetivo principal da primeira sessão de correção é melhorar o design, o formato e o equilíbrio de cor — não um resultado final perfeito em uma única visita.","A retenção de cor pode ser menor que o esperado; os resultados podem cicatrizar mais suaves ou claros.","Um retoque obrigatório é exigido para todo trabalho de correção e deve ser agendado em 4–6 semanas."]
+};
+
+/* =====================================================================
+   STATE + ENGINE
+===================================================================== */
+let lang = "en";
+let step = 0;            // 0 = service, 1 = full document + sign
+const TOTAL = 2;
+const STEPS2 = {
+  en:["Service","Consent & Signature"],
+  es:["Servicio","Consentimiento y Firma"],
+  pt:["Serviço","Consentimento e Assinatura"]
+};
+const state = {
+  service:null, technique:null, pigment:"",
+  patch:null, photo:null,
+  fields:{}, conditions:{}, decl:{}, declInitials:"",
+  special:null, prev:null,
+  signature:null, date:new Date().toLocaleDateString()
+};
+
+const app = document.getElementById("app");
+const t = ()=>C[lang];
+
+/* Service icons (brand gold, currentColor) */
+const ICONS = {
+  eyebrows:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 15C7 9.5 14.5 8.8 21.5 12.4"/><path d="M5.8 13.2 5 10.9"/><path d="M9 11.8 8.5 9.4"/><path d="M12.4 11.2 12.2 8.8"/><path d="M15.8 11.5 16.1 9.2"/><path d="M18.8 12.2 19.6 10.2"/></svg>`,
+  lips:`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 9.6C9.9 7.4 6.3 6.9 3.6 9.1 6 8.7 9 9.3 12 11.2 15 9.3 18 8.7 20.4 9.1 17.7 6.9 14.1 7.4 12 9.6Z"/><path d="M3.6 9.1C5.2 13.3 8.7 15.6 12 15.6 15.3 15.6 18.8 13.3 20.4 9.1 17.8 11.2 14.7 11.9 12 11.9 9.3 11.9 6.2 11.2 3.6 9.1Z"/></svg>`,
+  eyeliner:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 13C7.5 7.8 14.5 7.8 19.5 12L22.6 9.7"/><path d="M2.5 13C7.5 16.6 14.5 16.6 19.5 12"/><circle cx="11" cy="12" r="2.4" fill="currentColor" stroke="none"/></svg>`
+};
+
+function setLang(l){
+  lang = l; document.documentElement.lang = l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("active",b.dataset.lang===l));
+  render();
+}
+document.querySelectorAll(".lang button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+
+function progress(){
+  document.getElementById("pbar").style.width = Math.round(((step+1)/TOTAL)*100)+"%";
+  document.getElementById("plabel").textContent = (step+1)+" / "+TOTAL+" · "+STEPS2[lang][step];
+}
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+function render(){
+  progress(); window.scrollTo(0,0);
+  if(step===0) return renderService();
+  return renderDocument();
+}
+function goBack(){ if(step>0){step--; render();} }
+
+/* ---------- STEP 0 — Service ---------- */
+function renderService(){
+  const x=t();
+  app.innerHTML=`
+  <h1>${x.chooseService}</h1>
+  <p class="muted">${x.chooseServiceSub}</p>
+  <div class="choices">
+    ${SERVICES.map(s=>`<button class="choice ${state.service===s?'sel':''}" onclick="pickService('${s}')">
+      <span class="ico">${ICONS[s]}</span>
+      <span class="ct"><strong>${x.svc[s].t}</strong><span>${x.svc[s].d}</span></span></button>`).join("")}
+  </div>`;
+}
+function pickService(s){
+  if(state.service!==s){ state.technique=null; }
+  state.service=s; step=1; render();
+}
+
+/* ---------- STEP 1 — Full document + sign ---------- */
+function renderDocument(){
+  const x=t(); const a=ADD[lang][state.service];
+  const techs=a.techniques;
+  const svcName=x.svc[state.service].t;
+  const ovTitle={
+    en:{eyebrows:'Eyebrow Procedure Overview',lips:'Lip Blush Procedure Overview',eyeliner:'Eyeliner Procedure Overview'},
+    es:{eyebrows:'Descripción del Procedimiento — Cejas',lips:'Descripción del Procedimiento — Lip Blush',eyeliner:'Descripción del Procedimiento — Delineado'},
+    pt:{eyebrows:'Visão Geral do Procedimento — Sobrancelhas',lips:'Visão Geral do Procedimento — Lip Blush',eyeliner:'Visão Geral do Procedimento — Delineador'}
+  }[lang][state.service];
+  const hTech = lang==='en'?'Technique Selection':lang==='es'?'Selección de Técnica':'Seleção de Técnica';
+  const hPrev = lang==='en'?'Previous Work Disclosure':lang==='es'?'Declaración de Trabajo Previo':'Declaração de Trabalho Anterior';
+  const hSrisk = (lang==='en'?'Service-Specific Risks':lang==='es'?'Riesgos Específicos del Servicio':'Riscos Específicos do Serviço')+' — '+svcName;
+  const F=(k,type='text')=>{
+    let handler=`oninput="state.fields['${k}']=this.value"`, extra='';
+    if(k==='dob') handler=`onchange="calcAge(this)" oninput="calcAge(this)"`;
+    else if(k==='age'){ handler=''; extra='readonly placeholder="—"'; }
+    else if(k==='phone'||k==='ec_phone') handler=`oninput="maskPhone(this,'${k}')"`;
+    const opt=['ec_name','ec_phone'].includes(k);
+    const tag = opt ? ` <span class="muted" style="text-transform:none;letter-spacing:0">(${lang==='en'?'optional':lang==='es'?'opcional':'opcional'})</span>` : ' <span class="req">*</span>';
+    return `<label class="fld" data-f="${k}"><span>${x['f_'+k]}${tag}</span>
+    <input type="${type}" id="f_${k}" value="${esc(state.fields[k]||'')}" ${handler} ${extra}></label>`;
+  };
+  let special="";
+  if(a.specialTitle){
+    special=`<h2>${a.specialTitle}</h2><div class="policy">${a.specialText}</div>
+      <div class="cond" id="cond_special"><div class="cl">${a.specialQ}</div>${ynHTML('special',state.special)}</div>`;
+  }
+  const tu=TOUCHUP[lang];
+  app.innerHTML=`
+  <button class="btn ghost small" onclick="goBack()" style="margin-bottom:6px">↤ ${x.back}</button>
+  <h1>${svcName}</h1>
+
+  <h2>${hTech}</h2>
+  <div class="choices cols2" id="techChoices">
+    ${techs.map(tc=>`<button class="choice ${state.technique===tc?'sel':''}" onclick="pickTechCard(this,'${tc.replace(/'/g,"\\'")}')">
+      <span class="ct"><strong style="font-size:16px">${tc}</strong></span></button>`).join("")}
+  </div>
+  <label class="fld"><span>${x.pigmentLabel}</span>
+    <input type="text" id="pigment" value="${esc(state.pigment)}" oninput="state.pigment=this.value"></label>
+
+  <h2>${ovTitle}</h2>
+  ${a.overview.map(p=>`<p>${p}</p>`).join("")}
+  <div class="policy"><b>⚠ ${tu.split(":")[0]}:</b>${tu.substring(tu.indexOf(":")+1)}</div>
+  ${special}
+
+  <h2>${hPrev}</h2>
+  <div class="cond" id="cond_prev"><div class="cl">${a.prevQ}</div>${ynHTML('prev',state.prev)}</div>
+  <div id="prevNote" class="${state.prev==='yes'?'':'hide'}" style="margin-top:10px">
+    <ul class="risks">${PREVNOTE[lang].map(p=>`<li>${p}</li>`).join("")}</ul>
+  </div>
+
+  <h2>${hSrisk}</h2>
+  <ul class="risks">${a.risks.map(r=>`<li><b>${r[0]}:</b> ${r[1]}</li>`).join("")}</ul>
+
+  <h2>${x.generalTitle}</h2>
+  <div class="card"><p>${x.generalP1}</p><p>${x.generalP2}</p></div>
+
+  <h2>${x.risksTitle}</h2>
+  <p class="muted">${x.risksIntro}</p>
+  <ul class="risks">${x.risksAll.map(r=>`<li><b>${r[0]}:</b> ${r[1]}</li>`).join("")}</ul>
+  <h3>${x.patchTitle}</h3>
+  <div class="card"><p>${x.patchText}</p>
+    <div class="choices" id="patchChoices" style="margin-top:10px">
+      <button class="choice ${state.patch==='waive'?'sel':''}" onclick="pickGroup(this,'patch','waive')"><span class="ct"><strong style="font-size:16px">${x.patchWaive}</strong></span></button>
+      <button class="choice ${state.patch==='request'?'sel':''}" onclick="pickGroup(this,'patch','request')"><span class="ct"><strong style="font-size:16px">${x.patchRequest}</strong></span></button>
+    </div>
+  </div>
+
+  <h2>${x.declTitle}</h2>
+  <p class="muted">${x.declIntro}</p>
+  <div class="card">
+    <div class="decl" style="border-bottom:2px solid var(--gold);padding-bottom:12px"><input type="checkbox" id="declAll" onchange="setAllDecl(this.checked)"><label for="declAll"><b>${lang==='en'?'Select all':lang==='es'?'Seleccionar todo':'Marcar todos'}</b></label></div>
+    ${x.declItems.map((d,i)=>`<div class="decl"><input type="checkbox" id="d${i}" ${state.decl[i]?'checked':''} onchange="state.decl[${i}]=this.checked"><label for="d${i}">${d}</label></div>`).join("")}
+  </div>
+
+  <h2>${x.medTitle}</h2>
+  <p class="muted">${x.medIntro}</p>
+  <h3>${x.personal}</h3>
+  ${F('fullname')}
+  <div class="grid3">${F('dob','date')}${F('age','number')}${F('phone','tel')}</div>
+  ${F('email','email')}
+  ${F('address')}
+  <div class="grid2">${F('city')}${F('state')}</div>
+  <div class="grid2">${F('ec_name')}${F('ec_phone','tel')}</div>
+  ${F('id')}
+
+  <h2>${x.condTitle}</h2>
+  <p class="muted">${x.condIntro}</p>
+  <div style="display:flex;gap:8px;margin:10px 0 6px">
+    <button class="btn ghost small" type="button" onclick="setAllConditions('no')">${lang==='en'?'No (All)':lang==='es'?'No (Todas)':'Não (Todas)'}</button>
+    <button class="btn ghost small" type="button" onclick="setAllConditions('yes')">${lang==='en'?'Yes (All)':lang==='es'?'Sí (Todas)':'Sim (Todas)'}</button>
+  </div>
+  <div class="card" id="condCard">${x.conditions.map((c,i)=>condRow(c,i)).join("")}</div>
+  <label class="fld"><span>${x.medsLabel}</span><textarea id="meds" oninput="state.fields.meds=this.value">${esc(state.fields.meds||'')}</textarea></label>
+  <div class="card"><p class="muted">${x.medConfirm}</p></div>
+
+  <h2>${x.photoTitle}</h2>
+  <div class="card"><p>${x.photoText}</p>
+    <div class="choices" id="photoChoices" style="margin-top:10px">
+      <button class="choice ${state.photo==='yes'?'sel':''}" onclick="pickGroup(this,'photo','yes')"><span class="ico">✓</span><span class="ct"><strong style="font-size:16px">${x.photoYes}</strong></span></button>
+      <button class="choice ${state.photo==='no'?'sel':''}" onclick="pickGroup(this,'photo','no')"><span class="ico">✕</span><span class="ct"><strong style="font-size:16px">${x.photoNo}</strong></span></button>
+    </div>
+  </div>
+
+  <h2>${lang==='en'?'Service Consent':lang==='es'?'Consentimiento del Servicio':'Consentimento do Serviço'}</h2>
+  <div class="card"><p>${a.consent}</p></div>
+  <div class="card"><p>${x.certText}</p></div>
+
+  <h3>${x.sigLabel}</h3>
+  <div class="sigbox" id="sigbox">
+    <canvas id="sig"></canvas>
+    <div class="sigline"></div>
+    <div class="sighint" id="sighint">${x.sigHint}</div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+    <span class="muted">${x.dateAuto}: ${state.date}</span>
+    <button class="btn ghost small" onclick="clearSig()">${x.clearSig}</button>
+  </div>
+  <p class="govnote">${x.governing}</p>
+  <p class="err" id="errSubmit"></p>
+  <div class="nav">
+    <button class="btn ghost" onclick="goBack()">${x.back}</button>
+    <button class="btn primary" onclick="submitForm()">${x.submit}</button>
+  </div>`;
+  initSig();
+}
+
+/* ---- in-place toggles (no re-render, preserves scroll + signature) ---- */
+function pickGroup(el,key,val){
+  state[key]=val;
+  el.parentElement.classList.remove('field-bad');
+  el.parentElement.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function pickTechCard(el,tech){
+  state.technique=tech;
+  el.parentElement.classList.remove('field-bad');
+  el.parentElement.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function ynHTML(key,val){
+  return `<div class="yn">
+    <button class="${val==='yes'?'on-yes':''}" onclick="ynClick(this,'${key}','yes')">${t().yes}</button>
+    <button class="${val==='no'?'on-no':''}" onclick="ynClick(this,'${key}','no')">${t().no}</button></div>`;
+}
+function ynClick(el,key,val){
+  const yn=el.parentElement, btns=yn.querySelectorAll('button');
+  btns[0].className=val==='yes'?'on-yes':''; btns[1].className=val==='no'?'on-no':'';
+  const cont=document.getElementById('cond_'+key); if(cont)cont.classList.remove('field-bad');
+  if(key==='special') state.special=val;
+  else if(key==='prev'){ state.prev=val; const n=document.getElementById('prevNote'); if(n)n.classList.toggle('hide',val!=='yes'); }
+  else if(key[0]==='c'){ state.conditions[key]={...(state.conditions[key]||{}),yn:val}; const note=document.getElementById('note_'+key); if(note)note.classList.toggle('hide',val!=='yes'); }
+}
+function condRow(c,i){
+  const cur=state.conditions['c'+i]||{};
+  return `<div class="condwrap" id="cond_c${i}">
+    <div class="cond"><div class="cl">${c}</div>${ynHTML('c'+i,cur.yn)}</div>
+    <div class="note ${cur.yn==='yes'?'':'hide'}" id="note_c${i}">
+      <input type="text" placeholder="${t().notes}" value="${esc(cur.note||'')}" oninput="state.conditions['c${i}']={...(state.conditions['c${i}']||{}),note:this.value}">
+    </div></div>`;
+}
+
+/* Signature pad (vanilla) */
+let sigCtx,sigCanvas,drawing=false,hasSig=false;
+function initSig(){
+  sigCanvas=document.getElementById('sig');
+  const box=document.getElementById('sigbox');
+  const ratio=window.devicePixelRatio||1;
+  const w=box.clientWidth, h=200;
+  sigCanvas.width=w*ratio; sigCanvas.height=h*ratio;
+  sigCtx=sigCanvas.getContext('2d');
+  sigCtx.scale(ratio,ratio);
+  sigCtx.lineWidth=2.2; sigCtx.lineCap='round'; sigCtx.lineJoin='round'; sigCtx.strokeStyle='#2c2620';
+  hasSig=false;
+  const pos=(e)=>{const r=sigCanvas.getBoundingClientRect();const p=e.touches?e.touches[0]:e;return{x:p.clientX-r.left,y:p.clientY-r.top};};
+  const start=(e)=>{e.preventDefault();drawing=true;const{x,y}=pos(e);sigCtx.beginPath();sigCtx.moveTo(x,y);};
+  const move=(e)=>{if(!drawing)return;e.preventDefault();const{x,y}=pos(e);sigCtx.lineTo(x,y);sigCtx.stroke();if(!hasSig){hasSig=true;const h=document.getElementById('sighint');if(h)h.style.display='none';}};
+  const end=()=>{drawing=false;};
+  sigCanvas.addEventListener('mousedown',start);sigCanvas.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  sigCanvas.addEventListener('touchstart',start,{passive:false});
+  sigCanvas.addEventListener('touchmove',move,{passive:false});
+  sigCanvas.addEventListener('touchend',end);
+}
+function clearSig(){if(sigCtx){sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);hasSig=false;const h=document.getElementById('sighint');if(h)h.style.display='block';}}
+
+/* Age auto-calc + US phone mask */
+function calcAge(el){
+  state.fields.dob=el.value;
+  const dob=new Date(el.value+'T00:00:00');
+  const ageEl=document.getElementById('f_age');
+  if(isNaN(dob.getTime())){ state.fields.age=''; if(ageEl)ageEl.value=''; return; }
+  const now=new Date();
+  let age=now.getFullYear()-dob.getFullYear();
+  const m=now.getMonth()-dob.getMonth();
+  if(m<0||(m===0&&now.getDate()<dob.getDate())) age--;
+  if(age<0||age>130){ state.fields.age=''; if(ageEl)ageEl.value=''; return; }
+  state.fields.age=String(age); if(ageEl)ageEl.value=age;
+  const w=el.closest('[data-f]'); if(w)w.classList.remove('field-bad');
+  const wa=ageEl?ageEl.closest('[data-f]'):null; if(wa)wa.classList.remove('field-bad');
+}
+function maskPhone(el,key){
+  let d=el.value.replace(/\D/g,'').slice(0,10), out=d;
+  if(d.length>6) out='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+  else if(d.length>3) out='('+d.slice(0,3)+') '+d.slice(3);
+  else if(d.length>0) out='('+d;
+  el.value=out; state.fields[key]=out;
+}
+
+/* Submit + validation */
+let toastTimer;
+function showToast(msg){
+  const tt=document.getElementById('toast');
+  tt.textContent=msg; tt.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>tt.classList.remove('show'),4200);
+}
+function fail(msg,elId){
+  showToast(msg);
+  if(elId){const el=document.getElementById(elId); if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}
+}
+function mark(id,bad){const el=document.getElementById(id); if(el)el.classList.toggle('field-bad',bad);}
+function submitForm(){
+  const x=t(); const a=ADD[lang][state.service];
+  const condMsg = lang==='en'?'Please answer Yes or No for every medical condition.':lang==='es'?'Responda Sí o No en cada condición médica.':'Responda Sim ou Não em cada condição médica.';
+  // 1. technique
+  if(!state.technique){ mark('techChoices',true); return fail(x.reqWarn,'techChoices'); }
+  // 2. service-specific Yes/No (overview order: special disclosure, then previous work)
+  if(a.specialTitle && !state.special){ mark('cond_special',true); return fail(x.reqWarn,'cond_special'); }
+  if(!state.prev){ mark('cond_prev',true); return fail(x.reqWarn,'cond_prev'); }
+  // 3. patch test
+  if(!state.patch){ mark('patchChoices',true); return fail(x.patchWarn,'patchChoices'); }
+  // 4. declaration — every checkbox
+  if(!x.declItems.every((_,i)=>state.decl[i])) return fail(x.declWarn,'d0');
+  // 5. personal fields (all required)
+  const req=['fullname','dob','age','phone','email','address','city','state','id'];
+  let firstBad=null;
+  req.forEach(k=>{
+    const el=document.getElementById('f_'+k); const wrap=el.closest('[data-f]');
+    if(!el.value.trim()){wrap.classList.add('field-bad'); if(!firstBad)firstBad='f_'+k;} else wrap.classList.remove('field-bad');
+  });
+  if(firstBad) return fail(x.reqWarn,firstBad);
+  // 6. EVERY medical condition must be answered Yes/No
+  let firstCond=null;
+  for(let i=0;i<x.conditions.length;i++){
+    const c=state.conditions['c'+i]; const answered=c&&(c.yn==='yes'||c.yn==='no');
+    mark('cond_c'+i,!answered);
+    if(!answered && firstCond===null) firstCond='cond_c'+i;
+  }
+  if(firstCond) return fail(condMsg,firstCond);
+  // 7. photo consent
+  if(!state.photo){ mark('photoChoices',true); return fail(x.photoWarn,'photoChoices'); }
+  // 8. signature
+  if(!hasSig) return fail(x.sigWarn,'sigbox');
+
+  state.signature=sigCanvas.toDataURL('image/png');
+  const payload=buildPayload();
+  try{localStorage.setItem('lastConsent',JSON.stringify(payload));}catch(e){}
+  if(CONFIG.WEBHOOK_URL){
+    fetch(CONFIG.WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(()=>showThanks()).catch(()=>showThanks());
+  } else { showThanks(); }
+}
+function buildPayload(){
+  const conds={};
+  Object.keys(state.conditions).forEach(k=>{const c=state.conditions[k];if(c&&c.yn==='yes'){const idx=parseInt(k.substring(1));conds[C.en.conditions[idx]]=c.note||'yes';}});
+  return {
+    language:lang, governing_language:'en', business:CONFIG.BUSINESS,
+    service:C.en.svc[state.service].t, service_key:state.service,
+    technique:state.technique, pigment:state.pigment,
+    patch_test:state.patch, photo_consent:state.photo,
+    previous_work:state.prev, special_disclosure:state.special,
+    client:{
+      full_name:state.fields.fullname, dob:state.fields.dob, age:state.fields.age,
+      phone:state.fields.phone, email:state.fields.email, address:state.fields.address,
+      city:state.fields.city, state_zip:state.fields.state,
+      emergency_name:state.fields.ec_name, emergency_phone:state.fields.ec_phone, id:state.fields.id
+    },
+    medications:state.fields.meds, medical_flags:conds,
+    declaration_all_agreed:true,
+    signature_png:state.signature, signed_date:state.date,
+    submitted_at:new Date().toISOString(),
+    filename:(state.fields.fullname||'Client').replace(/[^\w]+/g,'')+'_'+C.en.svc[state.service].t+'_'+new Date().toISOString().slice(0,10)+'.pdf',
+    html_document:fullPrintHTML()
+  };
+}
+
+/* Select-all helpers */
+function setAllDecl(checked){
+  const x=t();
+  for(let i=0;i<x.declItems.length;i++){ state.decl[i]=checked; const cb=document.getElementById('d'+i); if(cb)cb.checked=checked; }
+}
+function setAllConditions(val){
+  const x=t();
+  for(let i=0;i<x.conditions.length;i++){
+    state.conditions['c'+i]={...(state.conditions['c'+i]||{}),yn:val};
+    const el=document.getElementById('cond_c'+i); if(el)el.classList.remove('field-bad');
+  }
+  const card=document.getElementById('condCard'); if(card) card.innerHTML=x.conditions.map((c,i)=>condRow(c,i)).join("");
+}
+
+/* Build a clean, read-only filled document (preview of the final PDF) */
+function buildFilledDoc(){
+  const x=t(); const a=ADD[lang][state.service]; const f=state.fields;
+  const svcName=x.svc[state.service].t;
+  const ovTitle={
+    en:{eyebrows:'Eyebrow Procedure Overview',lips:'Lip Blush Procedure Overview',eyeliner:'Eyeliner Procedure Overview'},
+    es:{eyebrows:'Descripción del Procedimiento — Cejas',lips:'Descripción del Procedimiento — Lip Blush',eyeliner:'Descripción del Procedimiento — Delineado'},
+    pt:{eyebrows:'Visão Geral do Procedimento — Sobrancelhas',lips:'Visão Geral do Procedimento — Lip Blush',eyeliner:'Visão Geral do Procedimento — Delineador'}
+  }[lang][state.service];
+  const ans=(v)=> v==='yes'?x.yes:(v==='no'?x.no:'—');
+  const tu=TOUCHUP[lang];
+  const condTable=x.conditions.map((c,i)=>{const cc=state.conditions['c'+i]||{};return `<tr><td>${c}</td><td class="yc">${ans(cc.yn)}</td><td>${esc(cc.note||'')}</td></tr>`;}).join('');
+  const declList=x.declItems.map((d,i)=>`<div class="d"><span class="ck">${state.decl[i]?'☑':'☐'}</span> ${d}</div>`).join('');
+  let special='';
+  if(a.specialTitle){ special=`<h3>${a.specialTitle}</h3><p>${a.specialText}</p><p><b>${a.specialQ}</b> &nbsp;→&nbsp; <b>${ans(state.special)}</b></p>`; }
+  const hPrev = lang==='en'?'Previous Work Disclosure':lang==='es'?'Declaración de Trabajo Previo':'Declaração de Trabalho Anterior';
+  const hSrisk = (lang==='en'?'Service-Specific Risks':lang==='es'?'Riesgos Específicos del Servicio':'Riscos Específicos do Serviço')+' — '+svcName;
+  return `<div class="pdoc">
+    <div class="phead"><div class="pbrand">Kika Bergmann</div><div class="psub">${CONFIG.BUSINESS} · ${x.formTitle}</div></div>
+    <table class="pmeta"><tr><td><b>${x.f_fullname}:</b> ${esc(f.fullname||'')}</td><td><b>${x.dateAuto}:</b> ${state.date}</td></tr>
+      <tr><td><b>${svcName}:</b> ${esc(state.technique||'')}</td><td><b>${x.f_email}:</b> ${esc(f.email||'')}</td></tr></table>
+
+    <h2>${ovTitle}</h2>
+    ${a.overview.map(p=>`<p>${p}</p>`).join('')}
+    <p class="pol"><b>${tu.split(':')[0]}:</b>${tu.substring(tu.indexOf(':')+1)}</p>
+    ${special}
+    <p><b>${hPrev}:</b> ${a.prevQ} &nbsp;→&nbsp; <b>${ans(state.prev)}</b></p>
+    <h3>${hSrisk}</h3>
+    <ul>${a.risks.map(r=>`<li><b>${r[0]}:</b> ${r[1]}</li>`).join('')}</ul>
+
+    <h2>${x.generalTitle}</h2>
+    <p>${x.generalP1}</p><p>${x.generalP2}</p>
+    <h3>${x.risksTitle}</h3>
+    <ul>${x.risksAll.map(r=>`<li><b>${r[0]}:</b> ${r[1]}</li>`).join('')}</ul>
+    <p><b>${x.patchTitle}:</b> ${state.patch==='waive'?x.patchWaive:state.patch==='request'?x.patchRequest:'—'}</p>
+
+    <h2>${x.declTitle}</h2>
+    ${declList}
+
+    <h2>${x.medTitle}</h2>
+    <table class="pinfo">
+      <tr><td><b>${x.f_fullname}</b><br>${esc(f.fullname||'')}</td><td><b>${x.f_dob}</b><br>${esc(f.dob||'')}</td><td><b>${x.f_age}</b><br>${esc(f.age||'')}</td></tr>
+      <tr><td><b>${x.f_phone}</b><br>${esc(f.phone||'')}</td><td><b>${x.f_email}</b><br>${esc(f.email||'')}</td><td><b>${x.f_id}</b><br>${esc(f.id||'')}</td></tr>
+      <tr><td colspan="2"><b>${x.f_address}</b><br>${esc(f.address||'')}</td><td><b>${x.f_city} / ${x.f_state}</b><br>${esc(f.city||'')} ${esc(f.state||'')}</td></tr>
+      <tr><td><b>${x.f_ec_name}</b><br>${esc(f.ec_name||'')}</td><td colspan="2"><b>${x.f_ec_phone}</b><br>${esc(f.ec_phone||'')}</td></tr>
+    </table>
+    <h3>${x.condTitle}</h3>
+    <table class="pcond"><tr><th>${lang==='en'?'Condition':lang==='es'?'Condición':'Condição'}</th><th>${x.yes}/${x.no}</th><th>${x.notes}</th></tr>${condTable}</table>
+    <p><b>${x.medsLabel.split('—')[0].trim()}:</b> ${esc(f.meds||'')}</p>
+
+    <h2>${x.photoTitle}</h2>
+    <p>${x.photoText}</p>
+    <p><b>→ ${state.photo==='yes'?x.photoYes:state.photo==='no'?x.photoNo:'—'}</b></p>
+
+    <h2>${lang==='en'?'Service Consent':lang==='es'?'Consentimiento del Servicio':'Consentimento do Serviço'}</h2>
+    <p>${a.consent}</p>
+    <p>${x.certText}</p>
+
+    <div class="psig">
+      <img src="${state.signature}" alt="signature" class="psigimg">
+      <div class="psigline">${esc(f.fullname||'')} &nbsp;·&nbsp; ${state.date}</div>
+    </div>
+    <p class="pgov">${x.governing}</p>
+  </div>`;
+}
+function fullPrintHTML(){
+  const css=`<style>
+    @page{margin:16mm}
+    *{box-sizing:border-box}
+    body{font-family:Georgia,'Times New Roman',serif;color:#2c2620;font-size:11pt;line-height:1.45;margin:0}
+    .pdoc{max-width:730px;margin:0 auto}
+    .phead{text-align:center;border-bottom:2px solid #b0905c;padding-bottom:8px;margin-bottom:12px}
+    .pbrand{font-size:26pt;color:#b0905c;letter-spacing:.5px}
+    .psub{font-size:8.5pt;letter-spacing:1.5px;text-transform:uppercase;color:#857a6c;margin-top:3px}
+    h2{color:#8a6f44;font-size:13.5pt;border-bottom:1px solid #e3d2c6;padding-bottom:3px;margin:16px 0 6px}
+    h3{font-size:11pt;margin:12px 0 4px}
+    p{margin:5px 0}
+    ul{margin:4px 0;padding-left:18px} li{margin:2px 0}
+    .pol{background:#fbeeee;border-left:3px solid #c0676b;padding:7px 10px;font-size:9.5pt}
+    table{width:100%;border-collapse:collapse;margin:6px 0}
+    .pmeta td,.pinfo td{border:1px solid #e3d2c6;padding:6px 8px;font-size:9.5pt;vertical-align:top}
+    .pcond td,.pcond th{border:1px solid #e3d2c6;padding:3px 7px;font-size:8.5pt;text-align:left}
+    .pcond th{background:#f0e9dd} .yc{text-align:center;font-weight:bold;white-space:nowrap}
+    .d{margin:3px 0;font-size:10pt} .ck{color:#b0905c;font-size:12pt}
+    .psig{margin-top:22px} .psigimg{max-height:90px;max-width:300px;display:block;border-bottom:1.5px solid #2c2620;padding-bottom:2px}
+    .psigline{font-size:9pt;color:#857a6c;margin-top:4px}
+    .pgov{font-size:8pt;color:#857a6c;font-style:italic;margin-top:16px}
+    h2,h3,.psig,table{page-break-inside:avoid}
+  </style>`;
+  return '<!DOCTYPE html><html lang="'+lang+'"><head><meta charset="utf-8"><title>'+esc(state.fields.fullname||'Consent Form')+'</title>'+css+'</head><body>'+buildFilledDoc()+'</body></html>';
+}
+function showThanks(){
+  const x=t();
+  const testNote = CONFIG.WEBHOOK_URL ? '' :
+    `<p class="muted" style="margin-top:18px">${lang==='en'?'Test build — PDF generation and archiving will be enabled in the next phase (n8n).':lang==='es'?'Versión de prueba — la generación de PDF y el archivo se activarán en la próxima fase (n8n).':'Versão de teste — a geração do PDF e o arquivamento serão ativados na próxima fase (n8n).'}</p>`;
+  window.scrollTo(0,0);
+  app.innerHTML=`<div class="center" style="padding:40px 0">
+    <div style="font-size:60px;color:var(--gold)">✦</div>
+    <h1>${x.thanksTitle}</h1>
+    <p class="lead">${x.thanksText}</p>
+    ${testNote}
+  </div>`;
+  document.getElementById('pbar').style.width='100%';
+}
+
+/* boot */
+setLang('en');
+</script>
+</body>
+</html>
