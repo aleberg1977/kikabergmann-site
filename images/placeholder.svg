@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3ece1"></stop>
+      <stop offset="1" stop-color="#e3d2c6"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="1000" fill="url(#bg)"></rect>
+  <rect x="62" y="62" width="876" height="876" fill="none" stroke="#b0905c" stroke-opacity="0.5" stroke-width="2"></rect>
+  <text x="500" y="430" font-family="Georgia, &#39;Times New Roman&#39;, serif" font-size="240" font-weight="300" fill="#b0905c" text-anchor="middle" dominant-baseline="middle">KB</text>
+  <rect x="430" y="558" width="140" height="2" fill="#b0905c"></rect>
+  <text x="500" y="628" font-family="Arial, Helvetica, sans-serif" font-size="28" letter-spacing="9" fill="#857a6c" text-anchor="middle" dominant-baseline="middle">FOTO EM BREVE</text>
+</svg>
