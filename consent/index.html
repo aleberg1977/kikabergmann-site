@@ -1106,6 +1106,7 @@ function buildFilledDoc(){
     <p class="pol"><b>${tu.split(':')[0]}:</b>${tu.substring(tu.indexOf(':')+1)}</p>
     ${special}
     <p><b>${hPrev}:</b> ${a.prevQ} &nbsp;→&nbsp; <b>${ans(state.prev)}</b></p>
+    ${state.prev==='yes' ? `<ul class="risks">${PREVNOTE[lang].map(p=>`<li>${p}</li>`).join('')}</ul>` : ''}
     <h3>${hSrisk}</h3>
     <ul>${a.risks.map(r=>`<li><b>${r[0]}:</b> ${r[1]}</li>`).join('')}</ul>
 
