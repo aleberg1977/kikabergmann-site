@@ -709,6 +709,19 @@ const TOUCHUP = {
   es:"POLÍTICA DE RETOQUE: Su cita de retoque DEBE programarse entre 4 y 6 semanas después de su sesión inicial. Los retoques NO se realizarán después de la ventana de 6 semanas, por ningún motivo. Esto aplica a todos los servicios sin excepción.",
   pt:"POLÍTICA DE RETOQUE: Seu retoque DEVE ser agendado entre 4 e 6 semanas após a sessão inicial. Os retoques NÃO serão realizados após a janela de 6 semanas, por nenhum motivo. Isso se aplica a todos os serviços sem exceção."
 };
+const DARKLIPS = {
+  en:{title:"DARK LIPS NEUTRALIZATION",
+      text:"<b>Important:</b> Clients with naturally dark, brown, purple, bluish, or hyperpigmented lips may require a neutralization process before the desired lip color can be applied. The first session is focused on correcting and balancing the natural undertones of the lips using corrective pigments. Depending on the level of pigmentation and how the lips heal and respond to the pigment, more than one neutralization session may be necessary before proceeding with the desired target color. Results and the number of sessions vary from client to client and cannot be guaranteed in advance.",
+      ack:"I understand and agree that Dark Lip Neutralization is a multi-session process and that additional neutralization sessions may be required before my desired lip color can be applied."},
+  es:{title:"NEUTRALIZACI\u00d3N DE LABIOS OSCUROS",
+      text:"<b>Importante:</b> Las clientas con labios naturalmente oscuros, marrones, morados, azulados o hiperpigmentados pueden requerir un proceso de neutralizaci\u00f3n antes de poder aplicar el color de labios deseado. La primera sesi\u00f3n se centra en corregir y equilibrar los subtonos naturales de los labios mediante pigmentos correctores. Seg\u00fan el nivel de pigmentaci\u00f3n y la forma en que los labios cicatrizan y responden al pigmento, puede ser necesaria m\u00e1s de una sesi\u00f3n de neutralizaci\u00f3n antes de proceder con el color objetivo deseado. Los resultados y el n\u00famero de sesiones var\u00edan de una clienta a otra y no pueden garantizarse por adelantado.",
+      ack:"Entiendo y acepto que la Neutralizaci\u00f3n de Labios Oscuros es un proceso de m\u00faltiples sesiones y que pueden requerirse sesiones adicionales de neutralizaci\u00f3n antes de poder aplicar el color de labios deseado."},
+  pt:{title:"NEUTRALIZA\u00c7\u00c3O DE L\u00c1BIOS ESCUROS",
+      text:"<b>Importante:</b> Clientes com l\u00e1bios naturalmente escuros, amarronzados, arroxeados, azulados ou hiperpigmentados podem precisar de um processo de neutraliza\u00e7\u00e3o antes que a cor de l\u00e1bios desejada possa ser aplicada. A primeira sess\u00e3o \u00e9 focada em corrigir e equilibrar os subtons naturais dos l\u00e1bios com pigmentos corretivos. Dependendo do n\u00edvel de pigmenta\u00e7\u00e3o e de como os l\u00e1bios cicatrizam e respondem ao pigmento, mais de uma sess\u00e3o de neutraliza\u00e7\u00e3o pode ser necess\u00e1ria antes de prosseguir com a cor desejada. Os resultados e o n\u00famero de sess\u00f5es variam de cliente para cliente e n\u00e3o podem ser garantidos antecipadamente.",
+      ack:"Entendo e concordo que a Neutraliza\u00e7\u00e3o de L\u00e1bios Escuros \u00e9 um processo de m\u00faltiplas sess\u00f5es e que sess\u00f5es adicionais de neutraliza\u00e7\u00e3o podem ser necess\u00e1rias antes que a cor de l\u00e1bios desejada possa ser aplicada."}
+};
+const DARKLIPS_IDX = 4;
+function isDarkLips(){ return state.service==='lips' && state.techniqueIdx===DARKLIPS_IDX; }
 const PREVNOTE = {
   en:["This procedure will be treated as a correction rather than a new application.","Existing pigment affects how new pigment heals, retains color, and holds shape.","The primary goal of the first correction session is to improve design, shape, and color balance — not a perfect final result in one visit.","Color retention may be lower than expected; results may heal softer or lighter.","A mandatory touch-up is required for all correction work and must be scheduled within 4–6 weeks."],
   es:["Este procedimiento se tratará como una corrección y no como una aplicación nueva.","El pigmento existente afecta cómo cicatriza el nuevo pigmento, retiene el color y mantiene la forma.","El objetivo principal de la primera sesión de corrección es mejorar el diseño, la forma y el equilibrio de color — no un resultado final perfecto en una sola visita.","La retención de color puede ser menor de lo esperado; los resultados pueden cicatrizar más suaves o claros.","Se requiere un retoque obligatorio para todo trabajo de corrección y debe programarse dentro de 4–6 semanas."],
@@ -727,8 +740,8 @@ const STEPS2 = {
   pt:["Serviço","Consentimento e Assinatura"]
 };
 const state = {
-  service:null, technique:null, pigment:"",
-  patch:null, photo:null,
+  service:null, technique:null, techniqueIdx:null, pigment:"",
+  patch:null, photo:null, darkAck:false,
   fields:{}, conditions:{}, decl:{}, declInitials:"",
   special:null, prev:null,
   signature:null, date:new Date().toLocaleDateString()
@@ -746,6 +759,9 @@ const ICONS = {
 
 function setLang(l){
   lang = l; document.documentElement.lang = l;
+  if(state.service && state.techniqueIdx!=null){
+    state.technique = ADD[l][state.service].techniques[state.techniqueIdx];
+  }
   document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("active",b.dataset.lang===l));
   render();
 }
@@ -777,7 +793,7 @@ function renderService(){
   </div>`;
 }
 function pickService(s){
-  if(state.service!==s){ state.technique=null; }
+  if(state.service!==s){ state.technique=null; state.techniqueIdx=null; state.darkAck=false; }
   state.service=s; step=1; render();
 }
 
@@ -792,6 +808,7 @@ function renderDocument(){
     pt:{eyebrows:'Visão Geral do Procedimento — Sobrancelhas',lips:'Visão Geral do Procedimento — Lip Blush',eyeliner:'Visão Geral do Procedimento — Delineador'}
   }[lang][state.service];
   const hTech = lang==='en'?'Technique Selection':lang==='es'?'Selección de Técnica':'Seleção de Técnica';
+  const dl = DARKLIPS[lang];
   const hPrev = lang==='en'?'Previous Work Disclosure':lang==='es'?'Declaración de Trabajo Previo':'Declaração de Trabalho Anterior';
   const hSrisk = (lang==='en'?'Service-Specific Risks':lang==='es'?'Riesgos Específicos del Servicio':'Riscos Específicos do Serviço')+' — '+svcName;
   const F=(k,type='text')=>{
@@ -816,8 +833,15 @@ function renderDocument(){
 
   <h2>${hTech}</h2>
   <div class="choices cols2" id="techChoices">
-    ${techs.map(tc=>`<button class="choice ${state.technique===tc?'sel':''}" onclick="pickTechCard(this,'${tc.replace(/'/g,"\\'")}')">
+    ${techs.map((tc,ti)=>`<button class="choice ${state.techniqueIdx===ti?'sel':''}" onclick="pickTechCard(this,${ti})">
       <span class="ct"><strong style="font-size:16px">${tc}</strong></span></button>`).join("")}
+  </div>
+  <div id="darkBlock" class="${isDarkLips()?'':'hide'}">
+    <h2>${dl.title}</h2>
+    <div class="policy">${dl.text}</div>
+    <div class="card">
+      <div class="decl"><input type="checkbox" id="darkAck" ${state.darkAck?'checked':''} onchange="state.darkAck=this.checked;document.getElementById('darkBlock').classList.remove('field-bad')"><label for="darkAck">${dl.ack} <span class="req">*</span></label></div>
+    </div>
   </div>
   <label class="fld"><span>${x.pigmentLabel}</span>
     <input type="text" id="pigment" value="${esc(state.pigment)}" oninput="state.pigment=this.value"></label>
@@ -916,11 +940,18 @@ function pickGroup(el,key,val){
   el.parentElement.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');
 }
-function pickTechCard(el,tech){
-  state.technique=tech;
+function pickTechCard(el,idx){
+  state.techniqueIdx=idx;
+  state.technique=ADD[lang][state.service].techniques[idx];
   el.parentElement.classList.remove('field-bad');
   el.parentElement.querySelectorAll('.choice').forEach(c=>c.classList.remove('sel'));
   el.classList.add('sel');
+  const blk=document.getElementById('darkBlock');
+  if(blk){
+    const on=isDarkLips();
+    blk.classList.toggle('hide',!on);
+    if(!on){ state.darkAck=false; const cb=document.getElementById('darkAck'); if(cb)cb.checked=false; blk.classList.remove('field-bad'); }
+  }
 }
 function ynHTML(key,val){
   return `<div class="yn">
@@ -1008,6 +1039,13 @@ function submitForm(){
   const condMsg = lang==='en'?'Please answer Yes or No for every medical condition.':lang==='es'?'Responda Sí o No en cada condición médica.':'Responda Sim ou Não em cada condição médica.';
   // 1. technique
   if(!state.technique){ mark('techChoices',true); return fail(x.reqWarn,'techChoices'); }
+  // 1b. dark lips neutralization acknowledgement
+  if(isDarkLips() && !state.darkAck){
+    const dlMsg = lang==='en'?'Please confirm you understand the Dark Lip Neutralization process.'
+      :lang==='es'?'Confirme que entiende el proceso de Neutralización de Labios Oscuros.'
+      :'Confirme que entende o processo de Neutralização de Lábios Escuros.';
+    mark('darkBlock',true); return fail(dlMsg,'darkBlock');
+  }
   // 2. service-specific Yes/No (overview order: special disclosure, then previous work)
   if(a.specialTitle && !state.special){ mark('cond_special',true); return fail(x.reqWarn,'cond_special'); }
   if(!state.prev){ mark('cond_prev',true); return fail(x.reqWarn,'cond_prev'); }
@@ -1053,6 +1091,7 @@ function buildPayload(){
     technique:state.technique, pigment:state.pigment,
     patch_test:state.patch, photo_consent:state.photo,
     previous_work:state.prev, special_disclosure:state.special,
+    dark_lips_neutralization_ack:isDarkLips()?state.darkAck:null,
     client:{
       full_name:state.fields.fullname, dob:state.fields.dob, age:state.fields.age,
       phone:state.fields.phone, email:state.fields.email, address:state.fields.address,
@@ -1097,6 +1136,8 @@ function buildFilledDoc(){
   const declList=x.declItems.map((d,i)=>`<div class="d"><span class="ck">${state.decl[i]?'☑':'☐'}</span> ${d}</div>`).join('');
   let special='';
   if(a.specialTitle){ special=`<h3>${a.specialTitle}</h3><p>${a.specialText}</p><p><b>${a.specialQ}</b> &nbsp;→&nbsp; <b>${ans(state.special)}</b></p>`; }
+  let darkSec='';
+  if(isDarkLips()){ const dl=DARKLIPS[lang]; darkSec=`<h3>${dl.title}</h3><p>${dl.text}</p><div class="d"><span class="ck">${state.darkAck?'☑':'☐'}</span> ${dl.ack}</div>`; }
   const hPrev = lang==='en'?'Previous Work Disclosure':lang==='es'?'Declaración de Trabajo Previo':'Declaração de Trabalho Anterior';
   const hSrisk = (lang==='en'?'Service-Specific Risks':lang==='es'?'Riesgos Específicos del Servicio':'Riscos Específicos do Serviço')+' — '+svcName;
   return `<div class="pdoc">
@@ -1108,6 +1149,7 @@ function buildFilledDoc(){
     ${a.overview.map(p=>`<p>${p}</p>`).join('')}
     <p class="pol"><b>${tu.split(':')[0]}:</b>${tu.substring(tu.indexOf(':')+1)}</p>
     ${special}
+    ${darkSec}
     <p><b>${hPrev}:</b> ${a.prevQ} &nbsp;→&nbsp; <b>${ans(state.prev)}</b></p>
     ${state.prev==='yes' ? `<ul class="risks">${PREVNOTE[lang].map(p=>`<li>${p}</li>`).join('')}</ul>` : ''}
     <h3>${hSrisk}</h3>
