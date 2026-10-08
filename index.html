@@ -82,7 +82,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Brow Lamination" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lip Blush & Dark Lips" } }
   ],
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "51", "bestRating": "5" }
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "55", "bestRating": "5" }
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -282,8 +282,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .gallery img:hover{filter:grayscale(0);transform:scale(1.03);}
 
   /* ---------- reviews ---------- */
-  .review-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
-  .review-figure .frame{position:relative;width:100%;max-width:480px;aspect-ratio:768/381;}
+  .review-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;align-items:center;}
+  .review-figure .frame{position:relative;width:100%;max-width:640px;aspect-ratio:768/381;}
   .review-figure img{width:100%;height:100%;object-fit:cover;position:relative;z-index:2;border-radius:var(--img-radius);}
   .review-figure .frame::before{content:"";position:absolute;inset:-18px 18px 18px -18px;border:1px solid var(--gold);z-index:1;border-radius:var(--img-radius);}
   .stars{display:flex;gap:6px;color:var(--gold);font-size:20px;letter-spacing:2px;margin-bottom:24px;}
@@ -292,6 +292,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .quote-mark{font-family:var(--serif);font-size:80px;color:var(--blush);line-height:.4;display:block;height:40px;}
   .reviewer{margin-top:26px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);}
   .reviewer b{color:var(--ink);font-weight:500;}
+
+
+  .rv-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;margin-bottom:16px;}
+  .rv-score{font-family:var(--serif);font-size:44px;line-height:1;color:var(--ink);}
+  .rv-head .stars{margin:0;}
+  .rv-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;}
+  .rv-link:hover{color:var(--ink);}
+  .rv-track{display:flex;align-items:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .rv-track::-webkit-scrollbar{display:none;}
+  .rv-slide{flex:0 0 100%;scroll-snap-align:start;min-width:0;padding-right:4px;}
+  .rv-slide .reviewer{margin-top:14px;}
+  .rv-slide .quote-mark{height:30px;}
+  .rv-text{font-family:var(--serif);font-size:clamp(19px,1.9vw,23px);line-height:1.5;margin:0;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty;}
+  .rv-slide.open .rv-text{display:block;-webkit-line-clamp:unset;}
+  .rv-more{background:none;border:0;padding:0;margin-top:10px;font:inherit;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);cursor:pointer;border-bottom:1px solid currentColor;}
+  .rv-more[hidden]{display:none;}
+  .rv-more .l{display:none;} .rv-slide.open .rv-more .m{display:none;} .rv-slide.open .rv-more .l{display:inline;}
+  .rv-tr{display:block;margin-top:8px;font-size:12px;color:var(--ink-soft);font-style:italic;}
+  .rv-tr:empty{display:none;}
+  .rv-nav{display:flex;align-items:center;gap:18px;margin-top:18px;}
+  .rv-arrow{width:44px;height:44px;border-radius:50%;border:1px solid var(--gold);background:transparent;color:var(--gold-deep);cursor:pointer;display:grid;place-items:center;font-size:18px;transition:background .2s,color .2s;}
+  .rv-arrow:hover{background:var(--gold);color:#fff;}
+  .rv-dots{display:flex;gap:8px;}
+  .rv-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:color-mix(in srgb,var(--gold) 35%,transparent);cursor:pointer;transition:background .2s,width .2s;}
+  .rv-dots button.on{background:var(--gold);width:22px;border-radius:4px;}
 
   /* ---------- appointment / map ---------- */
   .appt{background:var(--bg-2);}
@@ -478,7 +503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap about-grid">
     <div class="about-figure reveal">
       <div class="frame">
-        <img src="images/kika-hero.jpg" alt="Kika Bergmann, PMU Artist" />
+        <img src="images/kika-about.jpg" alt="Kika Bergmann, PMU Artist" />
       </div>
     </div>
     <div class="about-copy reveal">
@@ -585,12 +610,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img src="images/results/client-christine.webp" alt="Microblading and powder brows result — client Christine" onerror="this.onerror=null;this.src='images/placeholder.svg'" />
       </div>
     </div>
-    <div class="reveal">
-      <span class="eyebrow" data-i18n="rev_eyebrow">Reviews</span>
-      <div class="stars" aria-label="5 stars">★★★★★</div>
-      <span class="quote-mark">“</span>
-      <blockquote class="quote" data-i18n-html="rev_quote" style="margin:0;">I'm not exaggerating when I tell you this woman has to be the best in the industry. She <strong>totally transformed my eyebrows</strong> using both powder and microblading technique — I'm forever grateful. So attentive, super professional, and she'll help you figure out what suits your face best.</blockquote>
-      <div class="reviewer"><b>Christine</b> · <span data-i18n="rev_role">Verified client</span></div>
+    <div class="reveal rv-wrap">
+      <div class="rv-head">
+        <span class="rv-score" data-i18n="rv_score">4.9</span>
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <a class="rv-link" href="https://www.google.com/search?q=Orlando+Microblading+by+Kika+reviews" target="_blank" rel="noopener"><span data-i18n="rv_count">55 Google reviews</span> ↗</a>
+      </div>
+      <div class="rv-track" aria-live="polite">
+        <div class="rv-slide" role="group" aria-roledescription="slide">
+          <span class="quote-mark">“</span>
+          <blockquote class="rv-text" data-i18n-html="rv1"></blockquote>
+          <button class="rv-more" type="button" hidden><span class="m" data-i18n="rv_more">Read more</span><span class="l" data-i18n="rv_less">Show less</span></button>
+          <div class="reviewer"><b>Catherine Dettmer</b> · <span data-i18n="rv_google">Google review</span></div>
+        </div>
+        <div class="rv-slide" role="group" aria-roledescription="slide">
+          <span class="quote-mark">“</span>
+          <blockquote class="rv-text" data-i18n-html="rv2"></blockquote>
+          <button class="rv-more" type="button" hidden><span class="m" data-i18n="rv_more">Read more</span><span class="l" data-i18n="rv_less">Show less</span></button>
+          <div class="reviewer"><b>Raphaela Silva</b> · <span data-i18n="rv_google">Google review</span></div>
+        </div>
+        <div class="rv-slide" role="group" aria-roledescription="slide">
+          <span class="quote-mark">“</span>
+          <blockquote class="rv-text" data-i18n-html="rv3"></blockquote>
+          <button class="rv-more" type="button" hidden><span class="m" data-i18n="rv_more">Read more</span><span class="l" data-i18n="rv_less">Show less</span></button>
+          <div class="reviewer"><b>Betsy Molina</b> · <span data-i18n="rv_google">Google review</span></div>
+        </div>
+        <div class="rv-slide" role="group" aria-roledescription="slide">
+          <span class="quote-mark">“</span>
+          <blockquote class="rv-text" data-i18n-html="rv4"></blockquote>
+          <button class="rv-more" type="button" hidden><span class="m" data-i18n="rv_more">Read more</span><span class="l" data-i18n="rv_less">Show less</span></button>
+          <div class="reviewer"><b>Paola Arrieta</b> · <span data-i18n="rv_google">Google review</span></div>
+        </div>
+        <div class="rv-slide" role="group" aria-roledescription="slide">
+          <span class="quote-mark">“</span>
+          <blockquote class="rv-text" data-i18n-html="rv5"></blockquote>
+          <button class="rv-more" type="button" hidden><span class="m" data-i18n="rv_more">Read more</span><span class="l" data-i18n="rv_less">Show less</span></button>
+          <div class="reviewer"><b>Jenny Abdelnour</b> · <span data-i18n="rv_google">Google review</span></div>
+        </div>
+      </div>
+      <div class="rv-nav">
+        <button class="rv-arrow" type="button" data-dir="-1" aria-label="Previous review">←</button>
+        <div class="rv-dots"></div>
+        <button class="rv-arrow" type="button" data-dir="1" aria-label="Next review">→</button>
+      </div>
     </div>
   </div>
 </section>
@@ -695,6 +757,18 @@ const I18N = {
   crs_p1:{en:"You can also learn this art. Do you want to earn more and build a career?",pt:"Você também pode aprender esta arte. Quer ganhar mais e construir uma carreira?",es:"Tú también puedes aprender este arte. ¿Quieres ganar más y construir una carrera?"},
   crs_p2:{en:"Don't waste time — learn directly from one of the best in the aesthetics market.",pt:"Não perca tempo — aprenda diretamente com uma das melhores do mercado da estética.",es:"No pierdas tiempo — aprende directamente con una de las mejores del mercado de la estética."},
 
+  rv_score:{"en":"4.9","pt":"4,9","es":"4,9"},
+  rv_count:{"en":"55 Google reviews","pt":"55 avaliações no Google","es":"55 reseñas en Google"},
+  rv_google:{"en":"Google review","pt":"Avaliação no Google","es":"Reseña de Google"},
+  rv_more:{"en":"Read more","pt":"Ler mais","es":"Leer más"},
+  rv_less:{"en":"Show less","pt":"Mostrar menos","es":"Mostrar menos"},
+  rv_tr_en:{"en":"","pt":"Traduzido do inglês","es":"Traducido del inglés"},
+  rv_tr_es:{"en":"Translated from Spanish","pt":"Traduzido do espanhol","es":""},
+  rv1:{"en":"Kika is a very talented artist, patient, kind & passionate about her art. I'm so grateful to have chosen her as my eyeliner artist and my brush strokes for my eyebrows. I totally did not have any eyebrows so now I actually do! Well worth the reasonable price.","pt":"A Kika é uma artista muito talentosa, paciente, gentil e apaixonada pela sua arte. Sou muito grata por tê-la escolhido para o meu delineado e para os fios das minhas sobrancelhas. Eu não tinha sobrancelha nenhuma e agora eu tenho! Vale muito o preço justo.","es":"Kika es una artista muy talentosa, paciente, amable y apasionada por su arte. Estoy muy agradecida de haberla elegido para mi delineado y los trazos de mis cejas. ¡No tenía nada de cejas y ahora sí las tengo! Vale totalmente su precio justo."},
+  rv2:{"en":"I had my eyebrows done with the Soft Shading technique and my lips with Aquarelle Lip Blush for a very soft, natural tint, and I couldn't be happier with the results!<br><br>Before coming to Kika, I used to spend about 30 minutes every single morning shaping and filling in my eyebrows. Now I wake up with beautiful brows and get that time back every day. It's such a game changer!<br><br>Kika is located in Dr. Phillips, and from the very beginning she took the time to understand exactly what I wanted. Her approach is truly personalized, and she makes you feel comfortable and confident throughout the entire process.<br><br>What impressed me the most is her level of care after the appointment. She checked in with me about a week later to make sure everything was healing well, and she continued to follow up until my touch up appointment. It's clear that she genuinely cares about her clients and wants everyone to be completely satisfied with their results.<br><br>I highly recommend Kika to anyone looking for natural looking permanent makeup and an artist who truly goes above and beyond!","pt":"Fiz as sobrancelhas com a técnica Soft Shading e os lábios com Aquarelle Lip Blush para um tom bem suave e natural, e não poderia estar mais feliz com o resultado!<br><br>Antes de vir à Kika, eu gastava cerca de 30 minutos todas as manhãs modelando e preenchendo as sobrancelhas. Agora acordo com sobrancelhas lindas e ganho esse tempo de volta todos os dias. Mudou tudo!<br><br>A Kika fica em Dr. Phillips e, desde o início, dedicou tempo para entender exatamente o que eu queria. O atendimento é realmente personalizado, e ela faz você se sentir à vontade e confiante durante todo o processo.<br><br>O que mais me impressionou foi o cuidado depois do procedimento. Ela me procurou cerca de uma semana depois para saber se a cicatrização estava indo bem e continuou acompanhando até o meu retoque. Dá para ver que ela se importa de verdade com as clientes e quer que todas fiquem completamente satisfeitas com o resultado.<br><br>Recomendo muito a Kika para quem procura uma maquiagem definitiva com aparência natural e uma artista que vai muito além do esperado!","es":"Me hice las cejas con la técnica Soft Shading y los labios con Aquarelle Lip Blush para un tono muy suave y natural, ¡y no podría estar más feliz con los resultados!<br><br>Antes de ir con Kika, pasaba unos 30 minutos cada mañana dando forma y rellenando mis cejas. Ahora me despierto con unas cejas hermosas y recupero ese tiempo todos los días. ¡Me cambió la vida!<br><br>Kika está en Dr. Phillips y, desde el principio, se tomó el tiempo para entender exactamente lo que yo quería. Su atención es realmente personalizada y te hace sentir cómoda y segura durante todo el proceso.<br><br>Lo que más me impresionó fue su nivel de cuidado después de la cita. Me escribió alrededor de una semana después para asegurarse de que todo estuviera sanando bien, y siguió en contacto hasta mi retoque. Se nota que realmente se preocupa por sus clientas y quiere que todas queden completamente satisfechas con sus resultados.<br><br>¡Recomiendo muchísimo a Kika a quien busque un maquillaje permanente de aspecto natural y una artista que de verdad va más allá!"},
+  rv3:{"en":"I cannot recommend Kika enough! I went to them for both my eyebrow styling/microblading and permanent eyeliner, and the results are absolute perfection. From the consultation to the final look, they took the absolute time to map out the exact shape that complimented my face and eye structure. The procedure was comfortable, the studio was pristine, and the healing process was great. She always kept in touch to see how I was doing. I had recommended my friend and she agreed with the awesome work. You will not regret it.","pt":"Não tenho como recomendar a Kika o suficiente! Fiz o design/microblading das sobrancelhas e o delineado permanente, e o resultado é a perfeição absoluta. Da consulta ao resultado final, ela dedicou todo o tempo necessário para desenhar o formato exato que valorizasse meu rosto e meus olhos. O procedimento foi confortável, o estúdio impecável e a cicatrização ótima. Ela sempre manteve contato para saber como eu estava. Indiquei uma amiga e ela também adorou o trabalho. Você não vai se arrepender.","es":"¡No puedo recomendar a Kika lo suficiente! Fui para el diseño/microblading de cejas y el delineado permanente, y los resultados son la perfección absoluta. Desde la consulta hasta el resultado final, se tomó todo el tiempo necesario para diseñar la forma exacta que favoreciera mi rostro y mis ojos. El procedimiento fue cómodo, el estudio impecable y la cicatrización excelente. Siempre estuvo en contacto para ver cómo estaba. Se la recomendé a una amiga y ella también quedó encantada con el trabajo. No te vas a arrepentir."},
+  rv4:{"es":"10/10 el servicio y el trabajo de está mujer tan maravillosa y talentosa muy recomendable muchas gracias Kika haces un trabajo brutal","en":"10/10 for the service and the work of this wonderful, talented woman. Highly recommended! Thank you so much, Kika, you do amazing work.","pt":"Nota 10 para o atendimento e o trabalho dessa mulher tão maravilhosa e talentosa. Super recomendo! Muito obrigada, Kika, seu trabalho é incrível."},
+  rv5:{"es":"No tengo palabras del buen trabajo que me hizo es una exelente persona y muy profesional no la cambiaria por nada la recomiendo el 100 x % un 100 de 100 feliz","en":"I have no words for the great work she did on me. She is an excellent person and very professional. I wouldn't trade her for anything. I recommend her 100%. 100 out of 100 happy!","pt":"Não tenho palavras para o ótimo trabalho que ela fez em mim. É uma pessoa excelente e muito profissional, não troco por nada. Recomendo 100%. 100 de 100, feliz!"},
   rev_eyebrow:{en:"Reviews",pt:"Avaliações",es:"Reseñas"},
   rev_quote:{en:"I'm not exaggerating when I tell you this woman has to be the best in the industry. She <strong>totally transformed my eyebrows</strong> using both powder and microblading technique — I'm forever grateful. So attentive, super professional, and she'll help you figure out what suits your face best.",pt:"Não estou exagerando quando digo que esta mulher é a melhor do ramo. Ela <strong>transformou completamente minhas sobrancelhas</strong> usando as técnicas de powder e microblading — sou eternamente grata. Super atenciosa, profissional, e te ajuda a descobrir o que fica melhor no seu rosto.",es:"No exagero cuando digo que esta mujer es la mejor del sector. <strong>Transformó por completo mis cejas</strong> usando las técnicas de powder y microblading — le estaré eternamente agradecida. Muy atenta, profesional, y te ayuda a descubrir lo que mejor le sienta a tu rostro."},
   rev_role:{en:"Verified client",pt:"Cliente verificada",es:"Cliente verificada"},
@@ -713,6 +787,28 @@ const I18N = {
   foot_made:{en:"Luxury Permanent Makeup · Orlando, FL",pt:"Maquiagem Permanente de Luxo · Orlando, FL",es:"Maquillaje Permanente de Lujo · Orlando, FL"}
 };
 
+
+function initReviews(){
+  const track=document.querySelector('.rv-track'); if(!track) return;
+  const slides=[...track.querySelectorAll('.rv-slide')];
+  const dots=document.querySelector('.rv-dots');
+  slides.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Review '+(i+1));b.onclick=()=>{go(i);stop();};dots.appendChild(b);
+    s.querySelector('.rv-more').onclick=()=>{s.classList.toggle('open');stop();};});
+  const cur=()=>Math.round(track.scrollLeft/track.clientWidth);
+  const mark=()=>{const c=cur();[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===c));};
+  const go=i=>{const n=(i+slides.length)%slides.length;track.scrollTo({left:n*track.clientWidth});};
+  document.querySelectorAll('.rv-arrow').forEach(a=>a.onclick=()=>{go(cur()+(+a.dataset.dir));stop();});
+  track.addEventListener('scroll',()=>{clearTimeout(track._t);track._t=setTimeout(mark,80);});
+  let timer=setInterval(()=>{if(!document.hidden)go(cur()+1);},8000);
+  const stop=()=>{clearInterval(timer);timer=null;};
+  track.addEventListener('pointerdown',stop);track.addEventListener('touchstart',stop,{passive:true});
+  mark(); window.rvRefresh=refreshReviews;
+}
+function refreshReviews(){
+  document.querySelectorAll('.rv-slide').forEach(s=>{const t=s.querySelector('.rv-text');const open=s.classList.contains('open');s.classList.remove('open');
+    s.querySelector('.rv-more').hidden = t.scrollHeight<=t.clientHeight+2; if(open && !s.querySelector('.rv-more').hidden) s.classList.add('open');});
+}
+
 function setLang(lang){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
@@ -730,6 +826,7 @@ function setLang(lang){
   if(sel && sel.value!==lang) sel.value = lang;
   document.querySelectorAll('a[href^="payment-plans/"]').forEach(a=>{ a.href = "payment-plans/?lang="+lang; });
   try{ localStorage.setItem("kika_lang", lang); }catch(e){}
+  if(window.rvRefresh) requestAnimationFrame(window.rvRefresh);
 }
 
 document.querySelectorAll(".lang button").forEach(b=>{
@@ -747,6 +844,8 @@ function detectDeviceLang(){
   }
   return "en";
 }
+initReviews();
+window.addEventListener("resize",()=>window.rvRefresh&&window.rvRefresh());
 let initial="en";
 try{
   const stored = localStorage.getItem("kika_lang");
