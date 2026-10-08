@@ -255,19 +255,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .about .closing{font-family:var(--serif);font-style:italic;font-size:23px;color:var(--ink);margin-top:24px;}
 
   /* ---------- services ---------- */
-  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;}
-  .svc{background:var(--card);overflow:hidden;border:1px solid var(--line-soft);transition:.4s ease;position:relative;border-radius:var(--img-radius);}
-  .svc:hover{box-shadow:var(--shadow);transform:translateY(-4px);}
-  .svc.tall{grid-row:span 2;}
-  .svc-img{position:relative;overflow:hidden;}
-  .svc-img img{width:100%;height:100%;object-fit:cover;transition:1.1s cubic-bezier(.2,.7,.2,1);aspect-ratio:4/3;}
-  .svc.tall .svc-img img{aspect-ratio:3/4;}
-  .svc:hover .svc-img img{transform:scale(1.06);}
-  .svc-body{padding:30px 32px 34px;}
-  .svc-body .num{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.1em;}
-  .svc-body h3{font-size:27px;font-weight:400;margin:8px 0 14px;}
-  .svc-body p{color:var(--ink-soft);font-size:15px;margin:0;}
-  .svc-cta{text-align:center;margin-top:54px;}
+  .svc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 44px;max-width:900px;}
+  .svc-tab{font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--gold);border-radius:999px;padding:11px 20px;cursor:pointer;transition:background .25s,color .25s;white-space:nowrap;}
+  .svc-tab:hover{background:color-mix(in srgb,var(--gold) 14%,transparent);}
+  .svc-tab.on{background:var(--gold);color:#fff;}
+  .svc-stage{max-width:720px;margin:0 auto;}
+  .svc-panel.on{animation:svcIn .45s ease both;}
+  @keyframes svcIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .svc-panel .num{font-family:var(--serif);font-size:14px;color:var(--gold);letter-spacing:.14em;}
+  .svc-panel h3{font-size:clamp(32px,4vw,44px);font-weight:400;margin:10px 0 16px;}
+  .svc-panel p{color:var(--ink-soft);font-size:17px;line-height:1.7;margin:12px 0 30px;max-width:60ch;text-wrap:pretty;}
+  .svc-img{overflow:hidden;border-radius:var(--img-radius);max-width:560px;margin:0 auto;box-shadow:var(--shadow);}
+  .svc-img img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;}
+  .svc-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;margin-top:36px;}
+  .svc-arrows{display:flex;gap:10px;}
 
   /* ---------- courses ---------- */
   .courses{background:var(--ink);color:var(--bg);}
@@ -426,8 +427,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* swap language button-row for a compact dropdown so it never sits over the logo */
     .lang{display:none;}
     .lang-select{display:inline-block;}
-    .svc-grid{grid-template-columns:1fr;}
-    .svc.tall{grid-row:span 1;}
+    .svc-tabs{gap:8px;margin-bottom:32px;}
+    .svc-tab{padding:10px 14px;font-size:10.5px;letter-spacing:.12em;}
     .gallery{grid-template-columns:repeat(3,1fr);}
     .foot-grid{grid-template-columns:1fr;}
     header,header.scrolled{padding-left:22px;padding-right:22px;}
@@ -529,52 +530,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="eyebrow" data-i18n="svc_eyebrow">Signature Services</span>
       <h2 data-i18n-html="svc_title">Become more beautiful with <em>my services</em></h2>
     </div>
-    <div class="svc-grid">
-      <article class="svc tall reveal">
-        <div class="svc-img"><img src="images/services/microblading.webp" alt="Microblading" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
-        <div class="svc-body">
-          <span class="num">01</span>
-          <h3 data-i18n="svc1_t">Microblading</h3>
-          <p data-i18n="svc1_d">Semi-permanent eyebrow tattoo that uses hair-like strokes to create fuller, natural-looking brows.</p>
-        </div>
-      </article>
-      <article class="svc reveal">
-        <div class="svc-img"><img src="images/services/ombre.webp" alt="Ombré Brows" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
-        <div class="svc-body">
-          <span class="num">02</span>
-          <h3 data-i18n="svc2_t">Ombré Brows</h3>
-          <p data-i18n="svc2_d">Soft-shaded, powdered brows with a gradient effect — lighter at the front, darker at the tail.</p>
-        </div>
-      </article>
-      <article class="svc reveal">
-        <div class="svc-img"><img src="images/services/eyeliner.webp" alt="Eyeliner" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
-        <div class="svc-body">
-          <span class="num">03</span>
-          <h3 data-i18n="svc3_t">Eyeliner</h3>
-          <p data-i18n="svc3_d">Define your lash line with a semi-permanent eyeliner tattoo — classic, cat eye, or soft smoky finish. No daily makeup needed.</p>
-        </div>
-      </article>
-      <article class="svc reveal">
-        <div class="svc-img"><img src="images/services/brow-lamination.webp" alt="Brow Lamination" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
-        <div class="svc-body">
-          <span class="num">04</span>
-          <h3 data-i18n="svc4_t">Brow Lamination</h3>
-          <p data-i18n="svc4_d">A treatment that lifts and sets brow hairs in place, creating a fuller, smoother and more defined look.</p>
-        </div>
-      </article>
-      <article class="svc reveal">
-        <div class="svc-img"><img src="images/services/lip-blush.webp" alt="Lip Blush & Dark Lips" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
-        <div class="svc-body">
-          <span class="num">05</span>
-          <h3 data-i18n="svc5_t">Lip Blush &amp; Dark Lips</h3>
-          <p data-i18n="svc5_d">Semi-permanent lip tint that defines lips and enhances natural color. Dark lip neutralization evens out melanin-rich lips for a balanced tone.</p>
-        </div>
-      </article>
+    <div class="svc-tabs reveal" role="tablist" aria-label="Services">
+      <button class="svc-tab on" type="button" role="tab" aria-selected="true" data-i="0"><span data-i18n="svc1_t">Microblading</span></button>
+      <button class="svc-tab" type="button" role="tab" aria-selected="false" data-i="1"><span data-i18n="svc2_t">Ombré Brows</span></button>
+      <button class="svc-tab" type="button" role="tab" aria-selected="false" data-i="2"><span data-i18n="svc3_t">Eyeliner</span></button>
+      <button class="svc-tab" type="button" role="tab" aria-selected="false" data-i="3"><span data-i18n="svc4_t">Brow Lamination</span></button>
+      <button class="svc-tab" type="button" role="tab" aria-selected="false" data-i="4"><span data-i18n="svc5_t">Lip Blush &amp; Dark Lips</span></button>
     </div>
-    <div class="svc-cta reveal" style="flex-direction:column;gap:14px;">
-      <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+    <div class="svc-stage reveal">
+      <article class="svc-panel on" role="tabpanel">
+        <span class="num">01 / 05</span>
+        <p data-i18n="svc1_d">Semi-permanent eyebrow tattoo that uses hair-like strokes to create fuller, natural-looking brows.</p>
+        <div class="svc-img"><img src="images/services/microblading.webp" alt="Microblading" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
+      </article>
+      <article class="svc-panel" role="tabpanel" hidden>
+        <span class="num">02 / 05</span>
+        <p data-i18n="svc2_d">Soft-shaded, powdered brows with a gradient effect — lighter at the front, darker at the tail.</p>
+        <div class="svc-img"><img src="images/services/ombre.webp" alt="Ombré Brows" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
+      </article>
+      <article class="svc-panel" role="tabpanel" hidden>
+        <span class="num">03 / 05</span>
+        <p data-i18n="svc3_d">Define your lash line with a semi-permanent eyeliner tattoo — classic, cat eye, or soft smoky finish. No daily makeup needed.</p>
+        <div class="svc-img"><img src="images/services/eyeliner.webp" alt="Eyeliner" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
+      </article>
+      <article class="svc-panel" role="tabpanel" hidden>
+        <span class="num">04 / 05</span>
+        <p data-i18n="svc4_d">A treatment that lifts and sets brow hairs in place, creating a fuller, smoother and more defined look.</p>
+        <div class="svc-img"><img src="images/services/brow-lamination.webp" alt="Brow Lamination" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
+      </article>
+      <article class="svc-panel" role="tabpanel" hidden>
+        <span class="num">05 / 05</span>
+        <p data-i18n="svc5_d">Semi-permanent lip tint that defines lips and enhances natural color. Dark lip neutralization evens out melanin-rich lips for a balanced tone.</p>
+        <div class="svc-img"><img src="images/services/lip-blush.webp" alt="Lip Blush & Dark Lips" onerror="this.onerror=null;this.src='images/placeholder.svg'" /></div>
+      </article>
+      <div class="svc-actions">
         <a class="btn gold" href="https://book.squareup.com/appointments/4o4nx27rwecsvt/location/LR9AM8424STJP/services" target="_blank" rel="noopener"><span data-i18n="cta_book">Book Now</span></a>
         <a class="btn ghost cherry" href="payment-plans/"><svg viewBox="0 0 24 24" aria-hidden="true" style="flex:none"><circle cx="12" cy="12" r="12" fill="#0e1630"/><line x1="8.6" y1="15.4" x2="15.4" y2="8.6" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><circle cx="9" cy="9" r="1.55" fill="#fff"/><circle cx="15" cy="15" r="1.55" fill="#fff"/></svg><span data-i18n="cta_finance">Cherry Financing</span></a>
+        <div class="svc-arrows">
+          <button class="rv-arrow" type="button" data-sdir="-1" aria-label="Previous service">←</button>
+          <button class="rv-arrow" type="button" data-sdir="1" aria-label="Next service">→</button>
+        </div>
       </div>
     </div>
   </div>
@@ -788,21 +783,38 @@ const I18N = {
 };
 
 
+
+function initServices(){
+  const tabs=[...document.querySelectorAll('.svc-tab')], panels=[...document.querySelectorAll('.svc-panel')], bar=document.querySelector('.svc-tabs');
+  if(!tabs.length) return; let cur=0;
+  const show=i=>{cur=(i+panels.length)%panels.length;
+    tabs.forEach((t,k)=>{t.classList.toggle('on',k===cur);t.setAttribute('aria-selected',k===cur);});
+    panels.forEach((p,k)=>{const on=k===cur;p.hidden=!on;p.classList.toggle('on',on);});
+    const t=tabs[cur]; if(bar.scrollWidth>bar.clientWidth) bar.scrollTo({left:t.offsetLeft-(bar.clientWidth-t.offsetWidth)/2,behavior:'smooth'});};
+  let timer=null; const stop=()=>{clearInterval(timer);timer=null;};
+  tabs.forEach((t,k)=>t.onclick=()=>{stop();show(k);});
+  document.querySelectorAll('[data-sdir]').forEach(a=>a.onclick=()=>{stop();show(cur+(+a.dataset.sdir));});
+  const stage=document.querySelector('.svc-stage');
+  const start=()=>{if(!timer) timer=setInterval(()=>{if(!document.hidden) show(cur+1);},6000);};
+  if('IntersectionObserver' in window){ let used=false; new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting && !used){used=true;start();} })).observe(stage); } else start();
+  stage.addEventListener('touchstart',stop,{passive:true});
+}
+
 function initReviews(){
   const track=document.querySelector('.rv-track'); if(!track) return;
   const slides=[...track.querySelectorAll('.rv-slide')];
-  const dots=document.querySelector('.rv-dots');
+  const dots=document.querySelector('.rv-wrap .rv-dots');
   slides.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Review '+(i+1));b.onclick=()=>{go(i);stop();};dots.appendChild(b);
     s.querySelector('.rv-more').onclick=()=>{s.classList.toggle('open');stop();};});
-  const cur=()=>Math.round(track.scrollLeft/track.clientWidth);
+  const cur=()=>track.clientWidth?Math.round(track.scrollLeft/track.clientWidth):0;
   const mark=()=>{const c=cur();[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===c));};
   const go=i=>{const n=(i+slides.length)%slides.length;track.scrollTo({left:n*track.clientWidth});};
-  document.querySelectorAll('.rv-arrow').forEach(a=>a.onclick=()=>{go(cur()+(+a.dataset.dir));stop();});
+  document.querySelectorAll('.rv-wrap .rv-arrow').forEach(a=>a.onclick=()=>{go(cur()+(+a.dataset.dir));stop();});
   track.addEventListener('scroll',()=>{clearTimeout(track._t);track._t=setTimeout(mark,80);});
   let timer=setInterval(()=>{if(!document.hidden)go(cur()+1);},8000);
   const stop=()=>{clearInterval(timer);timer=null;};
   track.addEventListener('pointerdown',stop);track.addEventListener('touchstart',stop,{passive:true});
-  mark(); window.rvRefresh=refreshReviews;
+  mark(); window.addEventListener('load',mark); if(window.ResizeObserver) new ResizeObserver(mark).observe(track); window.rvRefresh=refreshReviews;
 }
 function refreshReviews(){
   document.querySelectorAll('.rv-slide').forEach(s=>{const t=s.querySelector('.rv-text');const open=s.classList.contains('open');s.classList.remove('open');
@@ -845,6 +857,7 @@ function detectDeviceLang(){
   return "en";
 }
 initReviews();
+initServices();
 window.addEventListener("resize",()=>window.rvRefresh&&window.rvRefresh());
 let initial="en";
 try{
